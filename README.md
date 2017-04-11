@@ -1,4 +1,4 @@
-chess_validator
+chess_movement_validator
 ===============
 
-Implement an engine validator for piece movement on chess board.
+Chess movement engine validator
