@@ -16,7 +16,7 @@ namespace Chess.Test
 
             var result = board.MovePiece( 'D', 5, 'A', 2 );
 
-            Assert.IsTrue( result.IsSuccess, result.Description );
+            Assert.True( result.IsSuccess, result.Description );
         }
 
         [Fact]
@@ -30,7 +30,7 @@ namespace Chess.Test
 
             var result = board.MovePiece( 'D', 5, 'A', 2 );
 
-            Assert.IsFalse( result.IsSuccess, result.Description );
+            Assert.False( result.IsSuccess, result.Description );
         }
 
         [Fact]
@@ -42,7 +42,7 @@ namespace Chess.Test
 
             var result = board.MovePiece( 'D', 5, 'E', 7 );
 
-            Assert.IsFalse( result.IsSuccess, result.Description );
+            Assert.False( result.IsSuccess, result.Description );
         }
     }
 }

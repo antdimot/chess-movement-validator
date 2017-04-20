@@ -2,6 +2,7 @@
 using Xunit;
 using Chess.Model;
 using Chess.Model.Pieces;
+using System.Collections.Generic;
 
 namespace Chess.Test
 {
@@ -14,7 +15,7 @@ namespace Chess.Test
 
             var piece = board.GetPiece( 'A', 2 );
 
-            Assert.IsNull( piece, "the position is not empty" );
+            Assert.NotNull( piece ); //the position is not empty
         }
 
         [Fact]
@@ -26,12 +27,12 @@ namespace Chess.Test
 
             var piece = board.GetPiece( 'A', 2 );
 
-            Assert.IsNotNull( piece, "the position is empty" );
+            Assert.NotNull( piece ); //the position is empty
 
-            Assert.IsInstanceOfType( piece, typeof( Pawn ), "the piece is not a pawn" );
+            Assert.IsType<Pawn>( piece );
         }
 
-        [TestMethod]
+        [Fact]
         public void InitializeForGame_PawnsPresent_Success()
         {
             var board = Board.GetNewBoard();
@@ -42,23 +43,23 @@ namespace Chess.Test
             {
                 var whitePiece = board.GetPiece( column, 2 );
 
-                Assert.IsNotNull( whitePiece, "the position is empty" );
+                Assert.NotNull( whitePiece );
 
-                Assert.IsInstanceOfType( whitePiece, typeof( Pawn ), "the piece is not a pawn" );
+                Assert.IsType<Pawn>( whitePiece );
 
-                Assert.IsTrue( whitePiece.ChessColor == ChessColor.White, "the color piece is not white" );
+                Assert.True( whitePiece.ChessColor == ChessColor.White );
 
                 var blackPiece = board.GetPiece( column, 7 );
 
-                Assert.IsNotNull( blackPiece, "the position is empty" );
+                Assert.NotNull( blackPiece );
 
-                Assert.IsInstanceOfType( blackPiece, typeof( Pawn ), "the piece is not a pawn" );
+                Assert.IsType<Pawn>( blackPiece );
 
-                Assert.IsTrue( blackPiece.ChessColor == ChessColor.Black, "the color piece is not black" );
+                Assert.True( blackPiece.ChessColor == ChessColor.Black );
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void InitializeForGame_RooksPresent_Success()
         {
             var board = Board.GetNewBoard();
@@ -101,7 +102,8 @@ namespace Chess.Test
 
             Assert.IsTrue( blackRook2.ChessColor == ChessColor.Black, "the color piece is not black" );
         }
-        [TestMethod]
+
+        [Fact]
         public void InitializeForGame_KnightsPresent_Success()
         {
             var board = Board.GetNewBoard();
@@ -145,7 +147,7 @@ namespace Chess.Test
             Assert.IsTrue( blackKnight2.ChessColor == ChessColor.Black, "the color piece is not black" );
         }
 
-        [TestMethod]
+        [Fact]
         public void InitializeForGame_BishopsPresent_Success()
         {
             var board = Board.GetNewBoard();
@@ -189,7 +191,7 @@ namespace Chess.Test
             Assert.IsTrue( blackBishop2.ChessColor == ChessColor.Black, "the color piece is not black" );
         }
 
-        [TestMethod]
+        [Fact]
         public void InitializeForGame_QueensPresent_Success()
         {
             var board = Board.GetNewBoard();
@@ -215,7 +217,7 @@ namespace Chess.Test
             Assert.IsTrue( blackQueen.ChessColor == ChessColor.Black, "the color piece is not black" );
         }
 
-        [TestMethod]
+        [Fact]
         public void InitializeForGame_KingsPresent_Success()
         {
             var board = Board.GetNewBoard();

@@ -43,7 +43,7 @@ namespace Chess.Test
             Assert.IsTrue( newPosition.ChessColor == ChessColor.White, "The piece at new position is different." );
         }
 
-        [TestMethod]
+        [Fact]
         public void MovePiece_WihEatFromAnyPosition_Success()
         {
             var board = Board.GetNewBoard();
@@ -63,7 +63,7 @@ namespace Chess.Test
             Assert.IsInstanceOfType( result.AtePiece, typeof(Pawn), "AtePiece property was not set correctly" );
         }
 
-        [TestMethod]
+        [Fact]
         public void MovePiece_WithEatFromAnyPosition_Error()
         {
             var board = Board.GetNewBoard();
@@ -77,7 +77,7 @@ namespace Chess.Test
             Assert.IsFalse( result.IsSuccess, result.Description );
         }
 
-        [TestMethod]
+        [Fact]
         public void MovePiece_ThreeStepFromStartPosition_Error()
         {
             var board = Board.GetNewBoard();
@@ -89,7 +89,7 @@ namespace Chess.Test
             Assert.IsFalse( result.IsSuccess, result.Description );
         }
 
-        [TestMethod]
+        [Fact]
         public void MovePiece_OneStepBackFromAnyPosition_Error()
         {
             var board = Board.GetNewBoard();
