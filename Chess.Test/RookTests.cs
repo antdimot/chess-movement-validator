@@ -1,17 +1,11 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Xunit;
 using Chess.Model;
-using Chess.Model.Pieces;
 
 namespace Chess.Test
 {
-    [TestClass]
     public class RookTests
     {
-        [TestMethod]
+        [Fact]
         public void MovePiece_VerticalPathISFree_Success()
         {
             var board = Board.GetNewBoard();
@@ -23,7 +17,7 @@ namespace Chess.Test
             Assert.IsTrue( result.IsSuccess, result.Description );
         }
 
-        [TestMethod]
+        [Fact]
         public void MovePiece_VerticalPathISNOTFree_Error()
         {
             var board = Board.GetNewBoard();

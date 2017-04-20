@@ -1,17 +1,13 @@
 ﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 using Chess.Model;
 using Chess.Model.Pieces;
 
 namespace Chess.Test
 {
-    [TestClass]
     public class BoardTests
     {
-        [TestMethod]
+        [Fact]
         public void GetNewBoard_Success()
         {
             var board = Board.GetNewBoard();
@@ -21,7 +17,7 @@ namespace Chess.Test
             Assert.IsNull( piece, "the position is not empty" );
         }
 
-        [TestMethod]
+        [Fact]
         public void SetPiece_Success()
         {
             var board = Board.GetNewBoard();

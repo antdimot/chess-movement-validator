@@ -1,17 +1,13 @@
 ﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 using Chess.Model;
 using Chess.Model.Pieces;
 
 namespace Chess.Test
 {
-    [TestClass]
     public class BaseMovementTests
     {
-        [TestMethod]
+        [Fact]
         public void MovePiece_ToBusyPostionWithSameColor_Error()
         {
             var board = Board.GetNewBoard();
