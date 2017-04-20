@@ -17,7 +17,7 @@ namespace Chess.Test
 
             var result = board.MovePiece( 'A', 5, 'A', 6 );
 
-            Assert.IsFalse( result.IsSuccess, result.Description );
+            Assert.True( result.IsSuccess, result.Description );
         }
     }
 }
