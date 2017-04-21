@@ -2,14 +2,12 @@
 {
     public class Queen : Piece
     {
-        public Queen( ChessColor color ) : base( color )
-        {
-        }
+        public Queen( ChessColor color ) : base( color ) { }
 
         public override void InitializeRules()
         {
             Rules.Add( new Rule(
-                      m => m.StartX - m.EndX == m.StartY - m.EndY
+                        m => m.StartX - m.EndX == m.StartY - m.EndY
                       ) );
 
             Rules.Add( new Rule(

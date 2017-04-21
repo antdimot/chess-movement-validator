@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Chess.Model.Pieces;
 
 namespace Chess.Model
@@ -15,8 +13,7 @@ namespace Chess.Model
         // piece position status on board
         private Piece[,] _pieces;
 
-        public Board()
-            : this( false )
+        public Board() : this( false )
         {
             Initialize();
         }
@@ -30,9 +27,7 @@ namespace Chess.Model
         // board factory
         public static Board GetNewBoard()
         {
-            var board = new Board();
-
-            return board;
+            return new Board();
         }
 
         private void Initialize()
@@ -156,11 +151,11 @@ namespace Chess.Model
                 return result;
             }
 
-            // set result information after ate
-            result.Ate = ( targetPiece != null && !selectPiece.ChessColor.Equals( targetPiece.ChessColor ) );
-            if( result.Ate )
+            // set result information after capture
+            result.Capture = ( targetPiece != null && !selectPiece.ChessColor.Equals( targetPiece.ChessColor ) );
+            if( result.Capture )
             {
-                result.AtePiece = targetPiece;
+                result.CapturedPiece = targetPiece;
             }
 
             // change position of piece

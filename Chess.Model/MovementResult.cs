@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Chess.Model
+﻿namespace Chess.Model
 {
     public class MovementResult
     {
@@ -13,28 +8,12 @@ namespace Chess.Model
             Description = "The movement is correct.";
         }
 
-        public bool IsSuccess
-        {
-            get;
-            set;
-        }
+        public bool IsSuccess { get; set; }
 
-        public string Description
-        {
-            get;
-            set;
-        }
+        public string Description { get; set; }
+        
+        public bool Capture { get; set; }
 
-        public bool Ate
-        {
-            get;
-            set;
-        }
-
-        public Piece AtePiece
-        {
-            get;
-            set;
-        }
+        public Piece CapturedPiece { get; set; }
     }
 }

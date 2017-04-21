@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Collections.ObjectModel;
 
 namespace Chess.Model
@@ -29,11 +27,11 @@ namespace Chess.Model
             InitializeRules();
         }
 
-        public bool IsValidMovement( bool withEat, int startRow, int startColumn, int endRow, int endColumn )
+        public bool IsValidMovement( bool withCaputure, int startRow, int startColumn, int endRow, int endColumn )
         {
             var movement = new Movement
             {
-                WithEat = withEat,
+                WithCaputure = withCaputure,
                 StartX = startColumn,
                 StartY = startRow,
                 EndX = endColumn,

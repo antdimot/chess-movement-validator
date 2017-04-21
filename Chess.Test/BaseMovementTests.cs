@@ -1,5 +1,4 @@
-﻿using System;
-using Xunit;
+﻿using Xunit;
 using Chess.Model;
 using Chess.Model.Pieces;
 
@@ -8,7 +7,7 @@ namespace Chess.Test
     public class BaseMovementTests
     {
         [Fact]
-        public void MovePiece_NotAllow_ToBusyPostionWithSameColor()
+        public void MovePiece_NotAllow_BusyPostionWithSameColor()
         {
             var board = Board.GetNewBoard();
 

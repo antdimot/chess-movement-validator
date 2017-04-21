@@ -56,11 +56,11 @@ namespace Chess.Test
 
             Assert.True( result.IsSuccess, result.Description );
 
-            Assert.True( result.Ate );
+            Assert.True( result.Capture );
 
-            Assert.NotNull( result.AtePiece );
+            Assert.NotNull( result.CapturedPiece );
 
-            Assert.IsType<Pawn>( result.AtePiece );
+            Assert.IsType<Pawn>( result.CapturedPiece );
         }
 
         [Fact]

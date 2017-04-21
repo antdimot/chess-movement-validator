@@ -1,5 +1,4 @@
-﻿using System;
-using Xunit;
+﻿using Xunit;
 using Chess.Model;
 using Chess.Model.Pieces;
 

@@ -2,9 +2,7 @@
 {
     public class Rook : Piece
     {
-        public Rook( ChessColor color ) : base( color )
-        {
-        }
+        public Rook( ChessColor color ) : base( color ) { }
 
         public override void InitializeRules()
         {

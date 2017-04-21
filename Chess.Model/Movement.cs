@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Chess.Model
 {
     public struct Movement
     {
-        public bool WithEat;
+        public bool WithCaputure;
         public int StartX, StartY;
         public int EndX, EndY;
 
@@ -31,9 +28,9 @@ namespace Chess.Model
             EndY = endY;
         }
 
-        public Movement( bool withEat, int startX, int startY, int endX, int endY )
+        public Movement( bool withCapture, int startX, int startY, int endX, int endY )
         {
-            WithEat = withEat;
+            WithCaputure = withCapture;
 
             if( endX < 1 || endX > 8 || endY < 1 || endY > 8 )
             {
