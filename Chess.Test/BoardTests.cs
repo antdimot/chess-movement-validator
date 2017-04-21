@@ -1,25 +1,23 @@
-﻿using System;
-using Xunit;
+﻿using Xunit;
 using Chess.Model;
 using Chess.Model.Pieces;
-using System.Collections.Generic;
 
 namespace Chess.Test
 {
     public class BoardTests
     {
         [Fact]
-        public void GetNewBoard_Success()
+        public void GetNewBoard()
         {
             var board = Board.GetNewBoard();
 
             var piece = board.GetPiece( 'A', 2 );
 
-            Assert.NotNull( piece ); //the position is not empty
+            Assert.Null( piece ); //the position is not empty
         }
 
         [Fact]
-        public void SetPiece_Success()
+        public void SetPiece()
         {
             var board = Board.GetNewBoard();
 
@@ -33,7 +31,7 @@ namespace Chess.Test
         }
 
         [Fact]
-        public void InitializeForGame_PawnsPresent_Success()
+        public void InitializeForGame_PawnsReady()
         {
             var board = Board.GetNewBoard();
 
@@ -60,7 +58,7 @@ namespace Chess.Test
         }
 
         [Fact]
-        public void InitializeForGame_RooksPresent_Success()
+        public void InitializeForGame_RooksReady()
         {
             var board = Board.GetNewBoard();
 
@@ -104,7 +102,7 @@ namespace Chess.Test
         }
 
         [Fact]
-        public void InitializeForGame_KnightsPresent_Success()
+        public void InitializeForGame_KnightsReady()
         {
             var board = Board.GetNewBoard();
 
@@ -148,7 +146,7 @@ namespace Chess.Test
         }
 
         [Fact]
-        public void InitializeForGame_BishopsPresent_Success()
+        public void InitializeForGame_BishopsReady()
         {
             var board = Board.GetNewBoard();
 
@@ -192,7 +190,7 @@ namespace Chess.Test
         }
 
         [Fact]
-        public void InitializeForGame_QueensPresent_Success()
+        public void InitializeForGame_QueensReady()
         {
             var board = Board.GetNewBoard();
 
@@ -218,7 +216,7 @@ namespace Chess.Test
         }
 
         [Fact]
-        public void InitializeForGame_KingsPresent_Success()
+        public void InitializeForGame_KingsReady()
         {
             var board = Board.GetNewBoard();
 

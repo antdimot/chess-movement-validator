@@ -7,7 +7,7 @@ namespace Chess.Test
     public class RookTests
     {
         [Fact]
-        public void MovePiece_VerticalPathISFree_Success()
+        public void MovePiece_Allow_VerticalPathISFree()
         {
             var board = Board.GetNewBoard();
 
@@ -19,7 +19,7 @@ namespace Chess.Test
         }
 
         [Fact]
-        public void MovePiece_VerticalPathISNOTFree_Error()
+        public void MovePiece_NotAllow_VerticalPathISNOTFree()
         {
             var board = Board.GetNewBoard();
 

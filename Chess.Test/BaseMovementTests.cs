@@ -8,7 +8,7 @@ namespace Chess.Test
     public class BaseMovementTests
     {
         [Fact]
-        public void MovePiece_ToBusyPostionWithSameColor_Error()
+        public void MovePiece_NotAllow_ToBusyPostionWithSameColor()
         {
             var board = Board.GetNewBoard();
 
@@ -17,7 +17,7 @@ namespace Chess.Test
 
             var result = board.MovePiece( 'A', 5, 'A', 6 );
 
-            Assert.True( result.IsSuccess, result.Description );
+            Assert.False( result.IsSuccess, result.Description );
         }
     }
 }

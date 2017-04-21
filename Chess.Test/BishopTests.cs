@@ -8,7 +8,7 @@ namespace Chess.Test
     public class BishopTests
     {
         [Fact]
-        public void MovePiece_DiagonalPathISFree_Success()
+        public void MovePiece_Allow_DiagonalPathISFree()
         {
             var board = Board.GetNewBoard();
 
@@ -20,7 +20,7 @@ namespace Chess.Test
         }
 
         [Fact]
-        public void MovePiece_DiagonalPathISNOTFree_Error()
+        public void MovePiece_NotAllow_DiagonalPathISNOTFree()
         {
             var board = Board.GetNewBoard();
 
@@ -34,7 +34,7 @@ namespace Chess.Test
         }
 
         [Fact]
-        public void MovePiece_MovementISNOTCorrect_Error()
+        public void MovePiece_NotAllow_MovementISNOTCorrect()
         {
             var board = Board.GetNewBoard();
 

@@ -8,7 +8,7 @@ namespace Chess.Test
     public class PawnTests
     {
         [Fact]
-        public void MovePiece_TwoStepFromStartPosition_Success()
+        public void MovePiece_Allow_TwoStepFromStartPosition()
         {
             var board = Board.GetNewBoard();
 
@@ -20,7 +20,7 @@ namespace Chess.Test
         }
 
         [Fact]
-        public void MovePiece_OneStepFromStartPosition_Success()
+        public void MovePiece_Allow_OneStepFromStartPosition()
         {
             var board = Board.GetNewBoard();
 
@@ -32,7 +32,7 @@ namespace Chess.Test
 
             var oldPosition = board.GetPiece( 'A', 2 );
 
-            Assert.NotNull( oldPosition );
+            Assert.Null( oldPosition );
 
             var newPosition = board.GetPiece( 'A', 3 );
 
@@ -44,7 +44,7 @@ namespace Chess.Test
         }
 
         [Fact]
-        public void MovePiece_WihEatFromAnyPosition_Success()
+        public void MovePiece_Allow_WihEatFromAnyPosition()
         {
             var board = Board.GetNewBoard();
 
@@ -64,7 +64,7 @@ namespace Chess.Test
         }
 
         [Fact]
-        public void MovePiece_WithEatFromAnyPosition_Error()
+        public void MovePiece_Allow_WithEatFromAnyPosition()
         {
             var board = Board.GetNewBoard();
 
@@ -78,7 +78,7 @@ namespace Chess.Test
         }
 
         [Fact]
-        public void MovePiece_ThreeStepFromStartPosition_Error()
+        public void MovePiece_Allow_ThreeStepFromStartPosition()
         {
             var board = Board.GetNewBoard();
 
@@ -90,7 +90,7 @@ namespace Chess.Test
         }
 
         [Fact]
-        public void MovePiece_OneStepBackFromAnyPosition_Error()
+        public void MovePiece_Allow_OneStepBackFromAnyPosition()
         {
             var board = Board.GetNewBoard();
 
