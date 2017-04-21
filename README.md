@@ -1,6 +1,10 @@
-chess_movement_validator
-===============
+# Chess movements validator
 
-Chess movement engine validator using .net core.
+Chess movement engine validator using .Net Core
 
-Warning the library doesn't work now because i'm working for migrate the solution to dotnet core.
+## How to build:
+
+* git clone https://github.com/antdimot/chess-movement-validator.git
+* cd chess-movement-validator
+* dotnet restore
+* dotnet build

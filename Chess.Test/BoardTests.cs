@@ -69,38 +69,38 @@ namespace Chess.Test
             // check first white rook
             var whiteRook1 = board.GetPiece( 'A', 1 );
 
-            Assert.IsNotNull( whiteRook1, "the position is empty" );
+            Assert.NotNull( whiteRook1 );
 
-            Assert.IsInstanceOfType( whiteRook1, typeof( Rook ), "the piece is not a rook" );
+            Assert.IsType<Rook>( whiteRook1 );
 
-            Assert.IsTrue( whiteRook1.ChessColor == ChessColor.White, "the color piece is not white" );
+            Assert.True( whiteRook1.ChessColor == ChessColor.White, "the color piece is not white" );
 
             // check second white rook
             var whiteRook2 = board.GetPiece( 'H', 1 );
 
-            Assert.IsNotNull( whiteRook2, "the position is empty" );
+            Assert.NotNull( whiteRook2 );
 
-            Assert.IsInstanceOfType( whiteRook2, typeof( Rook ), "the piece is not a rook" );
+            Assert.IsType<Rook>( whiteRook2 );
 
-            Assert.IsTrue( whiteRook2.ChessColor == ChessColor.White, "the color piece is not white" );
+            Assert.True( whiteRook2.ChessColor == ChessColor.White, "the color piece is not white" );
 
             // check first black rook
             var blackRook1 = board.GetPiece( 'A', 8 );
 
-            Assert.IsNotNull( blackRook1, "the position is empty" );
+            Assert.NotNull( blackRook1 );
 
-            Assert.IsInstanceOfType( blackRook1, typeof( Rook ), "the piece is not a rook" );
+            Assert.IsType<Rook>( blackRook1 );
 
-            Assert.IsTrue( blackRook1.ChessColor == ChessColor.Black, "the color piece is not black" );
+            Assert.True( blackRook1.ChessColor == ChessColor.Black, "the color piece is not black" );
 
             // check second black rook
             var blackRook2 = board.GetPiece( 'H', 8 );
 
-            Assert.IsNotNull( blackRook2, "the position is empty" );
+            Assert.NotNull( blackRook2 );
 
-            Assert.IsInstanceOfType( blackRook2, typeof( Rook ), "the piece is not a rook" );
+            Assert.IsType<Rook>( blackRook2 );
 
-            Assert.IsTrue( blackRook2.ChessColor == ChessColor.Black, "the color piece is not black" );
+            Assert.True( blackRook2.ChessColor == ChessColor.Black, "the color piece is not black" );
         }
 
         [Fact]
@@ -113,38 +113,38 @@ namespace Chess.Test
             // check first white knight
             var whiteKnight1 = board.GetPiece( 'B', 1 );
 
-            Assert.IsNotNull( whiteKnight1, "the position is empty" );
+            Assert.NotNull( whiteKnight1 );
 
-            Assert.IsInstanceOfType( whiteKnight1, typeof( Knight ), "the piece is not a knight" );
+            Assert.IsType<Knight>( whiteKnight1 );
 
-            Assert.IsTrue( whiteKnight1.ChessColor == ChessColor.White, "the color piece is not white" );
+            Assert.True( whiteKnight1.ChessColor == ChessColor.White, "the color piece is not white" );
 
             // check second white knight
             var whiteKnight2 = board.GetPiece( 'G', 1 );
 
-            Assert.IsNotNull( whiteKnight2, "the position is empty" );
+            Assert.NotNull( whiteKnight2 );
 
-            Assert.IsInstanceOfType( whiteKnight2, typeof( Knight ), "the piece is not a knight" );
+            Assert.IsType<Knight>( whiteKnight2 );
 
-            Assert.IsTrue( whiteKnight2.ChessColor == ChessColor.White, "the color piece is not white" );
+            Assert.True( whiteKnight2.ChessColor == ChessColor.White, "the color piece is not white" );
 
             // check first black knight
             var blackKnight1 = board.GetPiece( 'B', 8 );
 
-            Assert.IsNotNull( blackKnight1, "the position is empty" );
+            Assert.NotNull( blackKnight1 );
 
-            Assert.IsInstanceOfType( blackKnight1, typeof( Knight ), "the piece is not a knight" );
+            Assert.IsType<Knight>( blackKnight1 );
 
-            Assert.IsTrue( blackKnight1.ChessColor == ChessColor.Black, "the color piece is not black" );
+            Assert.True( blackKnight1.ChessColor == ChessColor.Black, "the color piece is not black" );
 
             // check second white knight
             var blackKnight2 = board.GetPiece( 'G', 8 );
 
-            Assert.IsNotNull( blackKnight2, "the position is empty" );
+            Assert.NotNull( blackKnight2 );
 
-            Assert.IsInstanceOfType( blackKnight2, typeof( Knight ), "the piece is not a knight" );
+            Assert.IsType<Knight>( blackKnight2 );
 
-            Assert.IsTrue( blackKnight2.ChessColor == ChessColor.Black, "the color piece is not black" );
+            Assert.True( blackKnight2.ChessColor == ChessColor.Black, "the color piece is not black" );
         }
 
         [Fact]
@@ -157,38 +157,38 @@ namespace Chess.Test
             // check first white bishop
             var whiteBishop1 = board.GetPiece( 'C', 1 );
 
-            Assert.IsNotNull( whiteBishop1, "the position is empty" );
+            Assert.NotNull( whiteBishop1 );
 
-            Assert.IsInstanceOfType( whiteBishop1, typeof( Bishop ), "the piece is not a bishop" );
+            Assert.IsType<Bishop>( whiteBishop1 );
 
-            Assert.IsTrue( whiteBishop1.ChessColor == ChessColor.White, "the color piece is not white" );
+            Assert.True( whiteBishop1.ChessColor == ChessColor.White, "the color piece is not white" );
 
             // check second white bishop
             var whiteBishop2 = board.GetPiece( 'F', 1 );
 
-            Assert.IsNotNull( whiteBishop2, "the position is empty" );
+            Assert.NotNull( whiteBishop2 );
 
-            Assert.IsInstanceOfType( whiteBishop2, typeof( Bishop ), "the piece is not a bishop" );
+            Assert.IsType<Bishop>( whiteBishop2 );
 
-            Assert.IsTrue( whiteBishop2.ChessColor == ChessColor.White, "the color piece is not white" );
+            Assert.True( whiteBishop2.ChessColor == ChessColor.White, "the color piece is not white" );
 
             // check first black bishop
             var blackBishop1 = board.GetPiece( 'C', 8 );
 
-            Assert.IsNotNull( blackBishop1, "the position is empty" );
+            Assert.NotNull( blackBishop1 );
 
-            Assert.IsInstanceOfType( blackBishop1, typeof( Bishop ), "the piece is not a bishop" );
+            Assert.IsType<Bishop>( blackBishop1 );
 
-            Assert.IsTrue( blackBishop1.ChessColor == ChessColor.Black, "the color piece is not black" );
+            Assert.True( blackBishop1.ChessColor == ChessColor.Black, "the color piece is not black" );
 
             // check second black bishop
             var blackBishop2 = board.GetPiece( 'F', 8 );
 
-            Assert.IsNotNull( blackBishop2, "the position is empty" );
+            Assert.NotNull( blackBishop2 );
 
-            Assert.IsInstanceOfType( blackBishop2, typeof( Bishop ), "the piece is not a bishop" );
+            Assert.IsType<Bishop>( blackBishop2 );
 
-            Assert.IsTrue( blackBishop2.ChessColor == ChessColor.Black, "the color piece is not black" );
+            Assert.True( blackBishop2.ChessColor == ChessColor.Black, "the color piece is not black" );
         }
 
         [Fact]
@@ -201,20 +201,20 @@ namespace Chess.Test
             // check white queen
             var whiteQueen = board.GetPiece( 'D', 1 );
 
-            Assert.IsNotNull( whiteQueen, "the position is empty" );
+            Assert.NotNull( whiteQueen );
 
-            Assert.IsInstanceOfType( whiteQueen, typeof( Queen ), "the piece is not a queen" );
+            Assert.IsType<Queen>( whiteQueen );
 
-            Assert.IsTrue( whiteQueen.ChessColor == ChessColor.White, "the color piece is not white" );
+            Assert.True( whiteQueen.ChessColor == ChessColor.White, "the color piece is not white" );
 
             // check  black queen
             var blackQueen = board.GetPiece( 'D', 8 );
 
-            Assert.IsNotNull( blackQueen, "the position is empty" );
+            Assert.NotNull( blackQueen );
 
-            Assert.IsInstanceOfType( blackQueen, typeof( Queen ), "the piece is not a queen" );
+            Assert.IsType<Queen>( blackQueen );
 
-            Assert.IsTrue( blackQueen.ChessColor == ChessColor.Black, "the color piece is not black" );
+            Assert.True( blackQueen.ChessColor == ChessColor.Black, "the color piece is not black" );
         }
 
         [Fact]
@@ -227,20 +227,20 @@ namespace Chess.Test
             // check white queen
             var whiteKing = board.GetPiece( 'E', 1 );
 
-            Assert.IsNotNull( whiteKing, "the position is empty" );
+            Assert.NotNull( whiteKing );
 
-            Assert.IsInstanceOfType( whiteKing, typeof( King ), "the piece is not a king" );
+            Assert.IsType<King>( whiteKing );
 
-            Assert.IsTrue( whiteKing.ChessColor == ChessColor.White, "the color piece is not white" );
+            Assert.True( whiteKing.ChessColor == ChessColor.White, "the color piece is not white" );
 
             // check  black queen
             var blackKing = board.GetPiece( 'E', 8 );
 
-            Assert.IsNotNull( blackKing, "the position is empty" );
+            Assert.NotNull( blackKing );
 
-            Assert.IsInstanceOfType( blackKing, typeof( King ), "the piece is not a king" );
+            Assert.IsType<King>( blackKing );
 
-            Assert.IsTrue( blackKing.ChessColor == ChessColor.Black, "the color piece is not black" );
+            Assert.True( blackKing.ChessColor == ChessColor.Black, "the color piece is not black" );
         }
     }
 }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Chess.Model.Pieces
+﻿namespace Chess.Model.Pieces
 {
     public class Rook : Piece
     {

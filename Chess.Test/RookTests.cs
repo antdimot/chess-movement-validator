@@ -1,5 +1,6 @@
 ﻿using Xunit;
 using Chess.Model;
+using Chess.Model.Pieces;
 
 namespace Chess.Test
 {
@@ -14,7 +15,7 @@ namespace Chess.Test
 
             var result = board.MovePiece( 'A', 1, 'A', 8 );
 
-            Assert.IsTrue( result.IsSuccess, result.Description );
+            Assert.True( result.IsSuccess, result.Description );
         }
 
         [Fact]
@@ -28,7 +29,7 @@ namespace Chess.Test
 
             var result = board.MovePiece( 'A', 1, 'A', 8 );
 
-            Assert.IsFalse( result.IsSuccess, "the piece pass over other piece" );
+            Assert.False( result.IsSuccess, "the piece pass over other piece" );
         }
     }
 }

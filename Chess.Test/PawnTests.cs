@@ -16,7 +16,7 @@ namespace Chess.Test
 
             var result = board.MovePiece( 'A', 2, 'A', 4 );
 
-            Assert.IsTrue( result.IsSuccess, result.Description );
+            Assert.True( result.IsSuccess, result.Description );
         }
 
         [Fact]
@@ -28,19 +28,19 @@ namespace Chess.Test
 
             var result = board.MovePiece( 'A', 2, 'A', 3 );
 
-            Assert.IsTrue( result.IsSuccess, result.Description );
+            Assert.True( result.IsSuccess, result.Description );
 
             var oldPosition = board.GetPiece( 'A', 2 );
 
-            Assert.IsNull( oldPosition, "There is still a piece at old position" );
+            Assert.NotNull( oldPosition );
 
             var newPosition = board.GetPiece( 'A', 3 );
 
-            Assert.IsNotNull( newPosition, "There is not a piece at new position" );
+            Assert.NotNull( newPosition );
 
-            Assert.IsInstanceOfType( newPosition, typeof( Pawn ), "The piece at new position is different." );
+            Assert.IsType<Pawn>( newPosition );
 
-            Assert.IsTrue( newPosition.ChessColor == ChessColor.White, "The piece at new position is different." );
+            Assert.True( newPosition.ChessColor == ChessColor.White, "The piece at new position is different." );
         }
 
         [Fact]
@@ -54,13 +54,13 @@ namespace Chess.Test
 
             var result = board.MovePiece( 'B', 4, 'C', 5 );
 
-            Assert.IsTrue( result.IsSuccess, result.Description );
+            Assert.True( result.IsSuccess, result.Description );
 
-            Assert.IsTrue( result.Ate, "Ate property was not set correctly" );
+            Assert.True( result.Ate );
 
-            Assert.IsNotNull( result.AtePiece, "AtePiece property was not set correctly" );
+            Assert.NotNull( result.AtePiece );
 
-            Assert.IsInstanceOfType( result.AtePiece, typeof(Pawn), "AtePiece property was not set correctly" );
+            Assert.IsType<Pawn>( result.AtePiece );
         }
 
         [Fact]
@@ -74,7 +74,7 @@ namespace Chess.Test
 
             var result = board.MovePiece( 'B', 4, 'C', 5 );
 
-            Assert.IsFalse( result.IsSuccess, result.Description );
+            Assert.False( result.IsSuccess, result.Description );
         }
 
         [Fact]
@@ -86,7 +86,7 @@ namespace Chess.Test
 
             var result = board.MovePiece( 'A', 2, 'A', 5 );
 
-            Assert.IsFalse( result.IsSuccess, result.Description );
+            Assert.False( result.IsSuccess, result.Description );
         }
 
         [Fact]
@@ -98,7 +98,7 @@ namespace Chess.Test
 
             var result = board.MovePiece( 'A', 5, 'A', 4 );
 
-            Assert.IsFalse( result.IsSuccess, result.Description );
+            Assert.False( result.IsSuccess, result.Description );
         }
     }
 }
