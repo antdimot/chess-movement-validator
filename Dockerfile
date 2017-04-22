@@ -6,3 +6,4 @@ WORKDIR /app
 ADD . /app
 
 RUN dotnet restore
+RUN dotnet build
