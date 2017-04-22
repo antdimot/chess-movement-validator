@@ -44,7 +44,7 @@ namespace Chess.Test
         }
 
         [Fact]
-        public void MovePiece_Allow_WihEatFromAnyPosition()
+        public void MovePiece_Allow_WihCaptureFromAnyPosition()
         {
             var board = Board.GetNewBoard();
 
@@ -64,7 +64,7 @@ namespace Chess.Test
         }
 
         [Fact]
-        public void MovePiece_Allow_WithEatFromAnyPosition()
+        public void MovePiece_NotAllow_WithCaptureFromAnyPosition()
         {
             var board = Board.GetNewBoard();
 
@@ -78,7 +78,7 @@ namespace Chess.Test
         }
 
         [Fact]
-        public void MovePiece_Allow_ThreeStepFromStartPosition()
+        public void MovePiece_NotAllow_ThreeStepFromStartPosition()
         {
             var board = Board.GetNewBoard();
 
@@ -90,7 +90,7 @@ namespace Chess.Test
         }
 
         [Fact]
-        public void MovePiece_Allow_OneStepBackFromAnyPosition()
+        public void MovePiece_NotAllow_OneStepBackFromAnyPosition()
         {
             var board = Board.GetNewBoard();
 
