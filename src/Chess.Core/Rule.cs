@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace Chess.Model
+namespace Chess.Core
 {
     public class Rule
     {

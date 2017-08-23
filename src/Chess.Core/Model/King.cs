@@ -1,5 +1,5 @@
-﻿namespace Chess.Model.Pieces
-{
+﻿namespace Chess.Core.Model
+{ 
     public class King : Piece
     {
         public King( ChessColor color ) : base( color ) { }

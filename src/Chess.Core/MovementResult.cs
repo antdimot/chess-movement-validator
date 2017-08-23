@@ -1,4 +1,6 @@
-﻿namespace Chess.Model
+﻿using Chess.Core.Model;
+
+namespace Chess.Core
 {
     public class MovementResult
     {

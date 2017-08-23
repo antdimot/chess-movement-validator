@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Chess.Model\Chess.Model.csproj" />
+    <ProjectReference Include="..\..\src\Chess.Core\Chess.Core.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Chess.Model
+namespace Chess.Core
 {
     public struct Movement
     {

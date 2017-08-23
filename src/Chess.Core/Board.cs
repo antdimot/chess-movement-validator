@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Chess.Model.Pieces;
+using Chess.Core.Model;
 
-namespace Chess.Model
+namespace Chess.Core
 {
     public class Board
     {

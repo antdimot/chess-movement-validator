@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Collections.ObjectModel;
 
-namespace Chess.Model
+namespace Chess.Core.Model
 {
     public abstract class Piece
     {

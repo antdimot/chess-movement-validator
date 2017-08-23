@@ -1,6 +1,6 @@
 ﻿using Xunit;
-using Chess.Model;
-using Chess.Model.Pieces;
+using Chess.Core;
+using Chess.Core.Model;
 
 namespace Chess.Test
 {
