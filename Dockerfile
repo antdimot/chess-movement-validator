@@ -1,9 +1,9 @@
-FROM microsoft/dotnet:runtime
+FROM microsoft/dotnet:latest
 
 RUN mkdir /app
 
 WORKDIR /app
-ADD . /app
+ADD ./src /app
 
 RUN dotnet restore
 RUN dotnet build
