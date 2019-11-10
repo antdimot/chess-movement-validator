@@ -11,7 +11,7 @@ namespace Chess.Test
         {
             var board = Board.GetNewBoard();
 
-            board.SetPiece<Rook>( ChessColor.White, 'A', 1 );
+            board.SetPiece<Rook,White>( 'A', 1 );
 
             var result = board.MovePiece( 'A', 1, 'A', 8 );
 
@@ -23,9 +23,9 @@ namespace Chess.Test
         {
             var board = Board.GetNewBoard();
 
-            board.SetPiece<Rook>( ChessColor.White, 'A', 1 );
+            board.SetPiece<Rook,White>( 'A', 1 );
 
-            board.SetPiece<Pawn>( ChessColor.White, 'A', 4 );
+            board.SetPiece<Pawn,White>( 'A', 4 );
 
             var result = board.MovePiece( 'A', 1, 'A', 8 );
 

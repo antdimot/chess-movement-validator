@@ -2,7 +2,9 @@
 {
     public class Knight : Piece
     {
-        public Knight( ChessColor color ) : base( color ) { }
+        // public Knight( ChessColor color ) : base( color ) { }
+
+        public Knight( PieceColor color ) : base( color ) { }
 
         public override void InitializeRules()
         {

@@ -6,19 +6,26 @@ namespace Chess.Core.Model
 {
     public abstract class Piece
     {
-        protected ChessColor Color;
-
-        public ChessColor ChessColor
-        {
-            get
-            {
-                return Color;
-            }
-        }
+        public int Id { get; set; }
+        
+        public PieceColor Color { get; private set; }
 
         protected Collection<Rule> Rules;
 
-        public Piece( ChessColor color )
+        public override bool Equals( object obj )
+        {
+            if( obj == null ) return false;
+
+            if( this.GetType() != obj.GetType() ) return false;
+
+            return true;
+        }
+
+        public override int GetHashCode() {
+            return this.Id;
+        }
+
+        public Piece( PieceColor color )
         {
             Rules = new Collection<Rule>();
 

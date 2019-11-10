@@ -7,7 +7,7 @@ namespace Chess.Core
     public class Board
     {
         public static Dictionary<char, int> Columns = new Dictionary<char, int>() {
-                { 'A', 0 }, { 'B', 1 }, { 'C', 2 }, { 'D', 3 }, { 'E', 4 }, { 'F', 5 }, { 'G', 6 }, { 'H', 7 }
+                { 'A', 1 }, { 'B', 2 }, { 'C', 3 }, { 'D', 4 }, { 'E', 5 }, { 'F', 6 }, { 'G', 7 }, { 'H', 8 }
         };
 
         // piece position status on board
@@ -29,6 +29,35 @@ namespace Chess.Core
         {
             return new Board();
         }
+    
+        public Piece GetPiece( char column, int row )
+        {
+            return _pieces[row - 1, Columns[column] - 1 ];
+        }
+
+        // piece factory
+        // public void SetPiece<T>( ChessColor color, char column, int row ) where T : Piece 
+        // {
+        //     var piece = Activator.CreateInstance( typeof( T ), color ) as Piece;
+
+        //     putPiece( piece, column, row );
+        // }
+
+        public T SetPiece<T,K>( char column, int row ) where T : Piece
+                                                       where K : PieceColor
+        {
+            PieceColor usedColor = PieceColor.Black;
+            
+            if( typeof(K) == typeof(White) ) {
+                usedColor = PieceColor.White;
+            }
+
+            var piece = Activator.CreateInstance( typeof( T ),  usedColor ) as T;
+
+            putPiece( piece, column, row );
+
+            return piece;
+        }
 
         private void Initialize()
         {
@@ -40,60 +69,48 @@ namespace Chess.Core
             // set pawns
             foreach( var c in Columns.Keys )
             {
-                SetPiece<Pawn>( ChessColor.White, c, 2 );
-                SetPiece<Pawn>( ChessColor.Black, c, 7 );
+                SetPiece<Pawn,White>( c, 2 );
+                SetPiece<Pawn,Black>( c, 7 );
             }
 
             // set rocks
-            SetPiece<Rook>( ChessColor.White, 'A', 1 );
-            SetPiece<Rook>( ChessColor.White, 'H', 1 );
-            SetPiece<Rook>( ChessColor.Black, 'A', 8 );
-            SetPiece<Rook>( ChessColor.Black, 'H', 8 );
+            SetPiece<Rook,White>( 'A', 1 );
+            SetPiece<Rook,White>( 'H', 1 );
+            SetPiece<Rook,Black>( 'A', 8 );
+            SetPiece<Rook,Black>( 'H', 8 );
 
             // set knights
-            SetPiece<Knight>( ChessColor.White, 'B', 1 );
-            SetPiece<Knight>( ChessColor.White, 'G', 1 );
-            SetPiece<Knight>( ChessColor.Black, 'B', 8 );
-            SetPiece<Knight>( ChessColor.Black, 'G', 8 );
+            SetPiece<Knight,White>( 'B', 1 );
+            SetPiece<Knight,White>( 'G', 1 );
+            SetPiece<Knight,Black>( 'B', 8 );
+            SetPiece<Knight,Black>( 'G', 8 );
 
             // set bishops
-            SetPiece<Bishop>( ChessColor.White, 'C', 1 );
-            SetPiece<Bishop>( ChessColor.White, 'F', 1 );
-            SetPiece<Bishop>( ChessColor.Black, 'C', 8 );
-            SetPiece<Bishop>( ChessColor.Black, 'F', 8 );
+            SetPiece<Bishop,White>( 'C', 1 );
+            SetPiece<Bishop,White>( 'F', 1 );
+            SetPiece<Bishop,Black>( 'C', 8 );
+            SetPiece<Bishop,Black>( 'F', 8 );
 
             // set queens
-            SetPiece<Queen>( ChessColor.White, 'D', 1 );
-            SetPiece<Queen>( ChessColor.Black, 'D', 8 );
+            SetPiece<Queen,White>( 'D', 1 );
+            SetPiece<Queen,Black>( 'D', 8 );
 
             // set kings
-            SetPiece<King>( ChessColor.White, 'E', 1 );
-            SetPiece<King>( ChessColor.Black, 'E', 8 );
+            SetPiece<King,White>( 'E', 1 );
+            SetPiece<King,Black>( 'E', 8 );
         }
 
-        public Piece GetPiece( char column, int row )
-        {
-            return _pieces[row - 1, Columns[column] ];
-        }
-
-        // piece factory
-        public void SetPiece<T>( ChessColor color, char column, int row ) where T : Piece 
-        {
-            var piece = Activator.CreateInstance( typeof( T ), color ) as Piece;
-
-            putPiece( piece, column, row );
-        }
 
         // set piece at position
         private void putPiece( Piece piece, char column, int row )
         {
-            _pieces[row - 1, Columns[column]] = piece;
+            _pieces[ row - 1, Columns[column] - 1 ] = piece;
         }
 
         // clear piece at position
         private void clearBoardPosition( char column, int row )
         {
-            _pieces[row - 1, Columns[column]] = null;
+            _pieces[ row - 1, Columns[column] - 1 ] = null;
         }
 
         // try to do a movement of piece
@@ -107,7 +124,8 @@ namespace Chess.Core
             if( selectPiece == null )
             {
                 result.IsSuccess = false;
-                result.Description = String.Format( "No piece is present at position {0}{1}", column, row.ToString() );
+
+                result.Description = String.Format( "The piece was not found at position {0}{1}", column, row.ToString() );
 
                 return result;
             }
@@ -116,13 +134,13 @@ namespace Chess.Core
 
             // check it is a valid movement for piece (rules piece validator)
             if( !selectPiece.IsValidMovement(
-                ( targetPiece != null && !selectPiece.ChessColor.Equals( targetPiece.ChessColor ) ),
-                row - 1, Columns[column], targetRow - 1, Columns[targetColumn] ) )
+                ( targetPiece != null && !selectPiece.Color.Equals( targetPiece.Color ) ),
+                row - 1, Columns[column] - 1 , targetRow - 1, Columns[targetColumn] -1 ) )
             {
                 result.IsSuccess = false;
                 result.Description =
                     String.Format( "The {0} {1} at position {2}{3} cannot move to {4}{5}",
-                    selectPiece.ChessColor.ToString(), selectPiece.GetType().Name,
+                    selectPiece.Color.ToString(), selectPiece.GetType().Name,
                     column, row.ToString(), targetColumn, targetRow.ToString() );
 
                 return result;
@@ -135,24 +153,24 @@ namespace Chess.Core
                 result.Description =
                     String.Format( "The path from {0}{1} to {2}{3} for {4}{5} is not free.",
                      column, row.ToString(), targetColumn, targetRow.ToString(),
-                     selectPiece.ChessColor.ToString(), selectPiece.GetType().Name );
+                     selectPiece.Color.ToString(), selectPiece.GetType().Name );
 
                 return result;
             }
 
             // check if target position there is already present a piece with same color
-            if( targetPiece != null && selectPiece.ChessColor.Equals( targetPiece.ChessColor ) )
+            if( targetPiece != null && selectPiece.Color.Equals( targetPiece.Color ) )
             {
                 result.IsSuccess = false;
                 result.Description =
                     String.Format( "There is already present a {0} piece at position {1}{2}",
-                    selectPiece.ChessColor.ToString(), targetColumn, targetRow );
+                    selectPiece.Color.ToString(), targetColumn, targetRow );
 
                 return result;
             }
 
             // set result information after capture
-            result.Capture = ( targetPiece != null && !selectPiece.ChessColor.Equals( targetPiece.ChessColor ) );
+            result.Capture = ( targetPiece != null && !selectPiece.Color.Equals( targetPiece.Color ) );
             if( result.Capture )
             {
                 result.CapturedPiece = targetPiece;
@@ -170,19 +188,19 @@ namespace Chess.Core
         {
             bool result = true;
 
-            int stepx = Columns[targetColumn].CompareTo( Columns[column] );
+            int stepx = (Columns[targetColumn] - 1).CompareTo( Columns[column] - 1 );
 
             int stepy = targetRow.CompareTo( row );
 
             // start position
-            int c = Columns[column];
+            int c = Columns[column] - 1;
             int r = row - 1;
 
             // next position
             c = c + stepx;
             r = r + stepy;
 
-            while( !(c == Columns[targetColumn] && r == (targetRow -1)) )
+            while( !(c == ( Columns[targetColumn] - 1 ) && r == (targetRow -1)) )
             {
                 var p = _pieces[r, c];
 

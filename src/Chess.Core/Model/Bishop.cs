@@ -2,7 +2,9 @@
 {
     public class Bishop : Piece
     {
-        public Bishop( ChessColor color ) : base( color ) { }
+        // public Bishop( ChessColor color ) : base( color ) { }
+
+        public Bishop( PieceColor color ) : base( color ) { }
 
         public override void InitializeRules()
         {

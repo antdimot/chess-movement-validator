@@ -11,7 +11,7 @@ namespace Chess.Test
         {
             var board = Board.GetNewBoard();
 
-            board.SetPiece<Pawn>( ChessColor.White, 'A', 2 );
+            board.SetPiece<Pawn,White>( 'A', 2 );
 
             var result = board.MovePiece( 'A', 2, 'A', 4 );
 
@@ -23,7 +23,7 @@ namespace Chess.Test
         {
             var board = Board.GetNewBoard();
 
-            board.SetPiece<Pawn>( ChessColor.White, 'A', 2 );
+            board.SetPiece<Pawn,White>( 'A', 2 );
 
             var result = board.MovePiece( 'A', 2, 'A', 3 );
 
@@ -39,7 +39,7 @@ namespace Chess.Test
 
             Assert.IsType<Pawn>( newPosition );
 
-            Assert.True( newPosition.ChessColor == ChessColor.White, "The piece at new position is different." );
+            Assert.True( newPosition.Color == PieceColor.White, "The piece at new position is different." );
         }
 
         [Fact]
@@ -47,9 +47,9 @@ namespace Chess.Test
         {
             var board = Board.GetNewBoard();
 
-            board.SetPiece<Pawn>( ChessColor.White, 'B', 4 );
+            board.SetPiece<Pawn,White>( 'B', 4 );
 
-            board.SetPiece<Pawn>( ChessColor.Black, 'C', 5 );
+            board.SetPiece<Pawn,Black>( 'C', 5 );
 
             var result = board.MovePiece( 'B', 4, 'C', 5 );
 
@@ -67,9 +67,9 @@ namespace Chess.Test
         {
             var board = Board.GetNewBoard();
 
-            board.SetPiece<Pawn>( ChessColor.White, 'B', 4 );
+            board.SetPiece<Pawn,White>( 'B', 4 );
 
-            board.SetPiece<Pawn>( ChessColor.White, 'C', 5 );
+            board.SetPiece<Pawn,White>( 'C', 5 );
 
             var result = board.MovePiece( 'B', 4, 'C', 5 );
 
@@ -81,7 +81,7 @@ namespace Chess.Test
         {
             var board = Board.GetNewBoard();
 
-            board.SetPiece<Pawn>( ChessColor.White, 'A', 2 );
+            board.SetPiece<Pawn,White>( 'A', 2 );
 
             var result = board.MovePiece( 'A', 2, 'A', 5 );
 
@@ -93,7 +93,7 @@ namespace Chess.Test
         {
             var board = Board.GetNewBoard();
 
-            board.SetPiece<Pawn>( ChessColor.White, 'A', 5 );
+            board.SetPiece<Pawn,White>( 'A', 5 );
 
             var result = board.MovePiece( 'A', 5, 'A', 4 );
 
