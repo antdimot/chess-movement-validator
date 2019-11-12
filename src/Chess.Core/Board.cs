@@ -101,22 +101,18 @@ namespace Chess.Core
         }
 
 
-        // set piece at position
-        private void putPiece( Piece piece, char column, int row )
+        public MovementResult MovePiece<Piece,PieceColor>( char targetColumn, int targetRow )
         {
-            _pieces[ row - 1, Columns[column] - 1 ] = piece;
-        }
+            char startColumn = '1';
+            int  startRow = 0;
 
-        // clear piece at position
-        private void clearBoardPosition( char column, int row )
-        {
-            _pieces[ row - 1, Columns[column] - 1 ] = null;
+            return MovePiece( startColumn, startRow, targetColumn, targetRow );
         }
 
         // try to do a movement of piece
         public MovementResult MovePiece( char column, int row, char targetColumn, int targetRow )
         {
-            MovementResult result = new MovementResult();
+            var result = new MovementResult();
 
             var selectPiece = GetPiece( column, row );
 
@@ -124,7 +120,6 @@ namespace Chess.Core
             if( selectPiece == null )
             {
                 result.IsSuccess = false;
-
                 result.Description = String.Format( "The piece was not found at position {0}{1}", column, row.ToString() );
 
                 return result;
@@ -181,6 +176,18 @@ namespace Chess.Core
             clearBoardPosition( column, row );
 
             return result;
+        }
+
+                // set piece at position
+        private void putPiece( Piece piece, char column, int row )
+        {
+            _pieces[ row - 1, Columns[column] - 1 ] = piece;
+        }
+
+        // clear piece at position
+        private void clearBoardPosition( char column, int row )
+        {
+            _pieces[ row - 1, Columns[column] - 1 ] = null;
         }
 
         // check if the path for select piece is free
