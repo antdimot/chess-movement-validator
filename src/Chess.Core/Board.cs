@@ -13,19 +13,15 @@ namespace Chess.Core
         // piece position status on board
         private Piece[,] _pieces;
 
-        public Board() : this( false )
+        public Board( bool startGame = false )
         {
-            Initialize();
-        }
+            _pieces = new Piece[8, 8];
 
-        public Board( bool startGame )
-        {
-            if( startGame )
-                InitializeForStartGame();
+            if( startGame ) Initialize();
         }
 
         // board factory
-        public static Board GetNewBoard()
+        public static Board NewBoard()
         {
             return new Board();
         }
@@ -35,22 +31,12 @@ namespace Chess.Core
             return _pieces[row - 1, Columns[column] - 1 ];
         }
 
-        // piece factory
-        // public void SetPiece<T>( ChessColor color, char column, int row ) where T : Piece 
-        // {
-        //     var piece = Activator.CreateInstance( typeof( T ), color ) as Piece;
-
-        //     putPiece( piece, column, row );
-        // }
-
         public T SetPiece<T,K>( char column, int row ) where T : Piece
                                                        where K : PieceColor
         {
             PieceColor usedColor = PieceColor.Black;
             
-            if( typeof(K) == typeof(White) ) {
-                usedColor = PieceColor.White;
-            }
+            if( typeof(K) == typeof(White) ) usedColor = PieceColor.White;
 
             var piece = Activator.CreateInstance( typeof( T ),  usedColor ) as T;
 
@@ -59,12 +45,7 @@ namespace Chess.Core
             return piece;
         }
 
-        private void Initialize()
-        {
-            _pieces = new Piece[8, 8];
-        }
-
-        public void InitializeForStartGame()
+        public void Initialize()
         {
             // set pawns
             foreach( var c in Columns.Keys )

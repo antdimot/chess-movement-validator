@@ -9,7 +9,7 @@ namespace Chess.Test
         [Fact]
         public void MovePiece_Allow_VerticalPathISFree()
         {
-            var board = Board.GetNewBoard();
+            var board = Board.NewBoard();
 
             board.SetPiece<Rook,White>( 'A', 1 );
 
@@ -21,7 +21,7 @@ namespace Chess.Test
         [Fact]
         public void MovePiece_NotAllow_VerticalPathISNOTFree()
         {
-            var board = Board.GetNewBoard();
+            var board = Board.NewBoard();
 
             board.SetPiece<Rook,White>( 'A', 1 );
 

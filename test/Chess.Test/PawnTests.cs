@@ -9,7 +9,7 @@ namespace Chess.Test
         [Fact]
         public void MovePiece_Allow_TwoStepFromStartPosition()
         {
-            var board = Board.GetNewBoard();
+            var board = Board.NewBoard();
 
             board.SetPiece<Pawn,White>( 'A', 2 );
 
@@ -21,7 +21,7 @@ namespace Chess.Test
         [Fact]
         public void MovePiece_Allow_OneStepFromStartPosition()
         {
-            var board = Board.GetNewBoard();
+            var board = Board.NewBoard();
 
             board.SetPiece<Pawn,White>( 'A', 2 );
 
@@ -45,7 +45,7 @@ namespace Chess.Test
         [Fact]
         public void MovePiece_Allow_WihCaptureFromAnyPosition()
         {
-            var board = Board.GetNewBoard();
+            var board = Board.NewBoard();
 
             board.SetPiece<Pawn,White>( 'B', 4 );
 
@@ -65,7 +65,7 @@ namespace Chess.Test
         [Fact]
         public void MovePiece_NotAllow_WithCaptureFromAnyPosition()
         {
-            var board = Board.GetNewBoard();
+            var board = Board.NewBoard();
 
             board.SetPiece<Pawn,White>( 'B', 4 );
 
@@ -79,7 +79,7 @@ namespace Chess.Test
         [Fact]
         public void MovePiece_NotAllow_ThreeStepFromStartPosition()
         {
-            var board = Board.GetNewBoard();
+            var board = Board.NewBoard();
 
             board.SetPiece<Pawn,White>( 'A', 2 );
 
@@ -91,7 +91,7 @@ namespace Chess.Test
         [Fact]
         public void MovePiece_NotAllow_OneStepBackFromAnyPosition()
         {
-            var board = Board.GetNewBoard();
+            var board = Board.NewBoard();
 
             board.SetPiece<Pawn,White>( 'A', 5 );
 

@@ -9,7 +9,7 @@ namespace Chess.Test
         [Fact]
         public void GetNewBoard()
         {
-            var board = Board.GetNewBoard();
+            var board = Board.NewBoard();
 
             var piece = board.GetPiece( 'A', 2 );
 
@@ -19,7 +19,7 @@ namespace Chess.Test
         [Fact]
         public void SetPiece()
         {
-            var board = Board.GetNewBoard();
+            var board = Board.NewBoard();
 
             board.SetPiece<Pawn,White>( 'A', 2 );
 
@@ -33,9 +33,9 @@ namespace Chess.Test
         [Fact]
         public void InitializeForGame_PawnsReady()
         {
-            var board = Board.GetNewBoard();
+            var board = Board.NewBoard();
 
-            board.InitializeForStartGame();
+            board.Initialize();
 
             foreach( var column in Board.Columns.Keys )
             {
@@ -60,9 +60,9 @@ namespace Chess.Test
         [Fact]
         public void InitializeForGame_RooksReady()
         {
-            var board = Board.GetNewBoard();
+            var board = Board.NewBoard();
 
-            board.InitializeForStartGame();
+            board.Initialize();
 
             // check first white rook
             var whiteRook1 = board.GetPiece( 'A', 1 );
@@ -104,9 +104,9 @@ namespace Chess.Test
         [Fact]
         public void InitializeForGame_KnightsReady()
         {
-            var board = Board.GetNewBoard();
+            var board = Board.NewBoard();
 
-            board.InitializeForStartGame();
+            board.Initialize();
 
             // check first white knight
             var whiteKnight1 = board.GetPiece( 'B', 1 );
@@ -148,9 +148,9 @@ namespace Chess.Test
         [Fact]
         public void InitializeForGame_BishopsReady()
         {
-            var board = Board.GetNewBoard();
+            var board = Board.NewBoard();
 
-            board.InitializeForStartGame();
+            board.Initialize();
 
             // check first white bishop
             var whiteBishop1 = board.GetPiece( 'C', 1 );
@@ -192,9 +192,9 @@ namespace Chess.Test
         [Fact]
         public void InitializeForGame_QueensReady()
         {
-            var board = Board.GetNewBoard();
+            var board = Board.NewBoard();
 
-            board.InitializeForStartGame();
+            board.Initialize();
 
             // check white queen
             var whiteQueen = board.GetPiece( 'D', 1 );
@@ -218,9 +218,9 @@ namespace Chess.Test
         [Fact]
         public void InitializeForGame_KingsReady()
         {
-            var board = Board.GetNewBoard();
+            var board = Board.NewBoard();
 
-            board.InitializeForStartGame();
+            board.Initialize();
 
             // check white queen
             var whiteKing = board.GetPiece( 'E', 1 );
