@@ -11,11 +11,15 @@ namespace Chess.Core
         };
 
         // piece position status on board
-        private Piece[,] _pieces;
+        private Object[,] _cells;
+        private IList<Piece> _whitePieces;
+        private IList<Piece> _blackPieces;
 
         public Board( bool startGame = false )
         {
-            _pieces = new Piece[8, 8];
+            _cells = new Object[8, 8];
+            _whitePieces = new List<Piece>();
+            _blackPieces = new List<Piece>();
 
             if( startGame ) Initialize();
         }
@@ -25,22 +29,40 @@ namespace Chess.Core
         {
             return new Board();
         }
-    
+
+        // public T GetPiece<T,K>()    where T : Piece
+        //                             where K : PieceColor
+        // {
+            
+        //     if( typeof(K) == typeof(White) ) {
+
+        //     }
+
+        //     return piece;
+        // }
+
         public Piece GetPiece( char column, int row )
         {
-            return _pieces[row - 1, Columns[column] - 1 ];
+            return _cells[row - 1, Columns[column] - 1 ] as Piece;
         }
 
-        public T SetPiece<T,K>( char column, int row ) where T : Piece
+
+        public T AddPiece<T,K>( char column, int row ) where T : Piece
                                                        where K : PieceColor
         {
-            PieceColor usedColor = PieceColor.Black;
+            T piece;
             
-            if( typeof(K) == typeof(White) ) usedColor = PieceColor.White;
+            if( typeof(K) == typeof(White) )
+            {
+                piece = Activator.CreateInstance( typeof( T ),  PieceColor.White ) as T;
+                _whitePieces.Add( piece );
+            }
+            else {
+                 piece = Activator.CreateInstance( typeof( T ),  PieceColor.Black ) as T;
+                 _blackPieces.Add( piece );
+            }
 
-            var piece = Activator.CreateInstance( typeof( T ),  usedColor ) as T;
-
-            putPiece( piece, column, row );
+            setPiece( piece, column, row );
 
             return piece;
         }
@@ -50,35 +72,35 @@ namespace Chess.Core
             // set pawns
             foreach( var c in Columns.Keys )
             {
-                SetPiece<Pawn,White>( c, 2 );
-                SetPiece<Pawn,Black>( c, 7 );
+                AddPiece<Pawn,White>( c, 2 );
+                AddPiece<Pawn,Black>( c, 7 );
             }
 
             // set rocks
-            SetPiece<Rook,White>( 'A', 1 );
-            SetPiece<Rook,White>( 'H', 1 );
-            SetPiece<Rook,Black>( 'A', 8 );
-            SetPiece<Rook,Black>( 'H', 8 );
+            AddPiece<Rook,White>( 'A', 1 );
+            AddPiece<Rook,White>( 'H', 1 );
+            AddPiece<Rook,Black>( 'A', 8 );
+            AddPiece<Rook,Black>( 'H', 8 );
 
             // set knights
-            SetPiece<Knight,White>( 'B', 1 );
-            SetPiece<Knight,White>( 'G', 1 );
-            SetPiece<Knight,Black>( 'B', 8 );
-            SetPiece<Knight,Black>( 'G', 8 );
+            AddPiece<Knight,White>( 'B', 1 );
+            AddPiece<Knight,White>( 'G', 1 );
+            AddPiece<Knight,Black>( 'B', 8 );
+            AddPiece<Knight,Black>( 'G', 8 );
 
             // set bishops
-            SetPiece<Bishop,White>( 'C', 1 );
-            SetPiece<Bishop,White>( 'F', 1 );
-            SetPiece<Bishop,Black>( 'C', 8 );
-            SetPiece<Bishop,Black>( 'F', 8 );
+            AddPiece<Bishop,White>( 'C', 1 );
+            AddPiece<Bishop,White>( 'F', 1 );
+            AddPiece<Bishop,Black>( 'C', 8 );
+            AddPiece<Bishop,Black>( 'F', 8 );
 
             // set queens
-            SetPiece<Queen,White>( 'D', 1 );
-            SetPiece<Queen,Black>( 'D', 8 );
+            AddPiece<Queen,White>( 'D', 1 );
+            AddPiece<Queen,Black>( 'D', 8 );
 
             // set kings
-            SetPiece<King,White>( 'E', 1 );
-            SetPiece<King,Black>( 'E', 8 );
+            AddPiece<King,White>( 'E', 1 );
+            AddPiece<King,Black>( 'E', 8 );
         }
 
 
@@ -153,22 +175,22 @@ namespace Chess.Core
             }
 
             // change position of piece
-            putPiece( selectPiece, targetColumn, targetRow );
+            setPiece( selectPiece, targetColumn, targetRow );
             clearBoardPosition( column, row );
 
             return result;
         }
 
                 // set piece at position
-        private void putPiece( Piece piece, char column, int row )
+        private void setPiece( Piece piece, char column, int row )
         {
-            _pieces[ row - 1, Columns[column] - 1 ] = piece;
+            _cells[ row - 1, Columns[column] - 1 ] = piece;
         }
 
         // clear piece at position
         private void clearBoardPosition( char column, int row )
         {
-            _pieces[ row - 1, Columns[column] - 1 ] = null;
+            _cells[ row - 1, Columns[column] - 1 ] = null;
         }
 
         // check if the path for select piece is free
@@ -190,7 +212,7 @@ namespace Chess.Core
 
             while( !(c == ( Columns[targetColumn] - 1 ) && r == (targetRow -1)) )
             {
-                var p = _pieces[r, c];
+                var p = _cells[r, c];
 
                 if( p != null )
                 {

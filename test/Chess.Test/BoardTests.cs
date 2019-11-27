@@ -21,7 +21,7 @@ namespace Chess.Test
         {
             var board = Board.NewBoard();
 
-            board.SetPiece<Pawn,White>( 'A', 2 );
+            board.AddPiece<Pawn,White>( 'A', 2 );
 
             var piece = board.GetPiece( 'A', 2 );
 
