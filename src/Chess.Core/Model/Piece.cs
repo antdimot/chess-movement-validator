@@ -6,8 +6,6 @@ namespace Chess.Core.Model
 {
     public abstract class Piece
     {
-        public int Id { get; set; }
-        
         public PieceColor Color { get; private set; }
 
         protected Collection<Rule> Rules;
@@ -19,10 +17,6 @@ namespace Chess.Core.Model
             if( this.GetType() != obj.GetType() ) return false;
 
             return true;
-        }
-
-        public override int GetHashCode() {
-            return this.Id;
         }
 
         public Piece( PieceColor color )
@@ -48,11 +42,17 @@ namespace Chess.Core.Model
             return Rules.Where( r => r.Validate( movement ) ).Any();
         }
 
+        public abstract void InitializeRules();
+
         public override string ToString()
         {
             return String.Format( "{0} {1}", Color.ToString(), this.GetType().Name );
         }
 
-        public abstract void InitializeRules();
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
     }
 }
