@@ -11,8 +11,8 @@ namespace Chess.Test
         {
             var board = Board.NewGame();
 
-            board.AddWhite<Pawn>( 'A', 5 );
-            board.AddWhite<Pawn>( 'A', 6 );
+            board.SetWhite<Pawn>( 'A', 5 );
+            board.SetWhite<Pawn>( 'A', 6 );
 
             var result = board.MovePiece( 'A', 5, 'A', 6 );
 

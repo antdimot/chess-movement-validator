@@ -7,17 +7,21 @@ namespace Chess.Core.Model
 {
     public class Board
     {
+        public static char[] Letters = { 'A','B','C','D','E','F','G','H' };
+
         public static Dictionary<char, int> Columns = new Dictionary<char, int>() {
                 { 'A', 1 }, { 'B', 2 }, { 'C', 3 }, { 'D', 4 }, { 'E', 5 }, { 'F', 6 }, { 'G', 7 }, { 'H', 8 }
         };
 
         // piece's position status on board
-        private Object[,] _cells;
+        private Object[,] _cases;
         private IList<Piece> _pieces;
+
+        public object[,] Cases() => _cases;
 
         private Board()
         {
-            _cells = new Object[8, 8];
+            _cases = new Object[8, 8];
             _pieces = new List<Piece>();
         }
 
@@ -31,10 +35,9 @@ namespace Chess.Core.Model
         }
 
         public static Board NewEmpty() => new Board();
+        public Piece GetPiece( char column, int row ) => _cases[row - 1, Columns[column] - 1 ] as Piece;
 
-        public Piece GetPiece( char column, int row ) => _cells[row - 1, Columns[column] - 1 ] as Piece;
-
-        public T AddWhite<T>( char column, int row ) where T : Piece
+        public T SetWhite<T>( char column, int row ) where T : Piece
         {
             T piece = Activator.CreateInstance( typeof( T ),  PieceColor.White ) as T;
             _pieces.Add( piece );
@@ -44,7 +47,7 @@ namespace Chess.Core.Model
             return piece;
         }
 
-        public T AddBlack<T>( char column, int row ) where T : Piece
+        public T SetBlack<T>( char column, int row ) where T : Piece
         {
             T piece = Activator.CreateInstance( typeof( T ),  PieceColor.Black ) as T;
             _pieces.Add( piece );
@@ -59,30 +62,30 @@ namespace Chess.Core.Model
             foreach( var column in Columns.Keys )
             {
 
-                AddWhite<Pawn>( column, 2 );
-                AddBlack<Pawn>( column, 7 );
+                SetWhite<Pawn>( column, 2 );
+                SetBlack<Pawn>( column, 7 );
             }
 
-            AddWhite<Rook>( 'A', 1 );
-            AddWhite<Rook>( 'H', 1 );
-            AddBlack<Rook>( 'A', 8 );
-            AddBlack<Rook>( 'H', 8 );
+            SetWhite<Rook>( 'A', 1 );
+            SetWhite<Rook>( 'H', 1 );
+            SetBlack<Rook>( 'A', 8 );
+            SetBlack<Rook>( 'H', 8 );
 
-            AddWhite<Knight>( 'B', 1 );
-            AddWhite<Knight>( 'G', 1 );
-            AddBlack<Knight>( 'B', 8 );
-            AddBlack<Knight>( 'G', 8 );
+            SetWhite<Knight>( 'B', 1 );
+            SetWhite<Knight>( 'G', 1 );
+            SetBlack<Knight>( 'B', 8 );
+            SetBlack<Knight>( 'G', 8 );
 
-            AddWhite<Bishop>( 'C', 1 );
-            AddWhite<Bishop>( 'F', 1 );
-            AddBlack<Bishop>( 'C', 8 );
-            AddBlack<Bishop>( 'F', 8 );
+            SetWhite<Bishop>( 'C', 1 );
+            SetWhite<Bishop>( 'F', 1 );
+            SetBlack<Bishop>( 'C', 8 );
+            SetBlack<Bishop>( 'F', 8 );
 
-            AddWhite<Queen>( 'D', 1 );
-            AddBlack<Queen>( 'D', 8 );
+            SetWhite<Queen>( 'D', 1 );
+            SetBlack<Queen>( 'D', 8 );
 
-            AddWhite<King>( 'E', 1 );
-            AddBlack<King>( 'E', 8 );
+            SetWhite<King>( 'E', 1 );
+            SetBlack<King>( 'E', 8 );
         }
 
         // try to do a movement of piece
@@ -165,16 +168,16 @@ namespace Chess.Core.Model
             return result;
         }
 
-                // set piece at position
+        // set piece at position
         private void setPiece( Piece piece, char column, int row )
         {
-            _cells[ row - 1, Columns[column] - 1 ] = piece;
+            _cases[ row - 1, Columns[column] - 1 ] = piece;
         }
 
         // clear piece at position
         private void clearBoardPosition( char column, int row )
         {
-            _cells[ row - 1, Columns[column] - 1 ] = null;
+            _cases[ row - 1, Columns[column] - 1 ] = null;
         }
 
         // check if the path for select piece is free
@@ -196,7 +199,7 @@ namespace Chess.Core.Model
 
             while( !(c == ( Columns[targetColumn] - 1 ) && r == (targetRow -1)) )
             {
-                var p = _cells[r, c];
+                var p = _cases[r, c];
 
                 if( p != null )
                 {

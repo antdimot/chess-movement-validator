@@ -11,7 +11,7 @@ namespace Chess.Test
         {
             var board = Board.NewEmpty();
 
-            board.AddWhite<Bishop>( 'D', 5 );
+            board.SetWhite<Bishop>( 'D', 5 );
 
             var result = board.MovePiece( 'D', 5, 'A', 2 );
 
@@ -23,9 +23,9 @@ namespace Chess.Test
         {
             var board = Board.NewEmpty();
 
-            board.AddWhite<Bishop>( 'D', 5 );
+            board.SetWhite<Bishop>( 'D', 5 );
 
-            board.AddWhite<Pawn>( 'B', 3 );
+            board.SetWhite<Pawn>( 'B', 3 );
 
             var result = board.MovePiece( 'D', 5, 'A', 2 );
 
@@ -37,7 +37,7 @@ namespace Chess.Test
         {
             var board = Board.NewEmpty();
 
-            board.AddWhite<Bishop>( 'D', 5 );
+            board.SetWhite<Bishop>( 'D', 5 );
 
             var result = board.MovePiece( 'D', 5, 'E', 7 );
 
