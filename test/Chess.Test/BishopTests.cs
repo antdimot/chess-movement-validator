@@ -9,7 +9,7 @@ namespace Chess.Test
         [Fact]
         public void MovePiece_Allow_DiagonalPathISFree()
         {
-            var board = Board.NewBoard();
+            var board = Board.NewEmpty();
 
             board.AddPiece<Bishop,White>( 'D', 5 );
 
@@ -21,7 +21,7 @@ namespace Chess.Test
         [Fact]
         public void MovePiece_NotAllow_DiagonalPathISNOTFree()
         {
-            var board = Board.NewBoard();
+            var board = Board.NewEmpty();
 
             board.AddPiece<Bishop,White>( 'D', 5 );
 
@@ -35,7 +35,7 @@ namespace Chess.Test
         [Fact]
         public void MovePiece_NotAllow_MovementISNOTCorrect()
         {
-            var board = Board.NewBoard();
+            var board = Board.NewEmpty();
 
             board.AddPiece<Bishop,White>( 'D', 5 );
 

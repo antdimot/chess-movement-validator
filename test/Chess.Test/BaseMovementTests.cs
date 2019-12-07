@@ -9,7 +9,7 @@ namespace Chess.Test
         [Fact]
         public void MovePiece_NotAllow_BusyPostionWithSameColor()
         {
-            var board = Board.NewBoard();
+            var board = Board.NewGame();
 
             board.AddPiece<Pawn,White>( 'A', 5 );
             board.AddPiece<Pawn,White>( 'A', 6 );

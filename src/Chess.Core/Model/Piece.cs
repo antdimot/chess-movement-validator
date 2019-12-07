@@ -7,6 +7,8 @@ namespace Chess.Core.Model
     public abstract class Piece
     {
         public PieceColor Color { get; private set; }
+        
+        public Boolean IsAlive { get; set; }
 
         protected Collection<Rule> Rules;
 
@@ -24,6 +26,8 @@ namespace Chess.Core.Model
             Rules = new Collection<Rule>();
 
             Color = color;
+
+            IsAlive = true;
 
             InitializeRules();
         }

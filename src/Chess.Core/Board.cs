@@ -15,37 +15,31 @@ namespace Chess.Core
         private IList<Piece> _whitePieces;
         private IList<Piece> _blackPieces;
 
-        public Board( bool startGame = false )
+        private Board()
         {
             _cells = new Object[8, 8];
             _whitePieces = new List<Piece>();
             _blackPieces = new List<Piece>();
-
-            if( startGame ) Initialize();
         }
 
-        // board factory
-        public static Board NewBoard()
+        public static Board NewGame()
+        {
+            var board = new Board();
+
+            board.InitGame();
+
+            return board;
+        }
+
+        public static Board NewEmpty()
         {
             return new Board();
         }
-
-        // public T GetPiece<T,K>()    where T : Piece
-        //                             where K : PieceColor
-        // {
-            
-        //     if( typeof(K) == typeof(White) ) {
-
-        //     }
-
-        //     return piece;
-        // }
 
         public Piece GetPiece( char column, int row )
         {
             return _cells[row - 1, Columns[column] - 1 ] as Piece;
         }
-
 
         public T AddPiece<T,K>( char column, int row ) where T : Piece
                                                        where K : PieceColor
@@ -67,38 +61,32 @@ namespace Chess.Core
             return piece;
         }
 
-        public void Initialize()
+        public void InitGame()
         {
-            // set pawns
             foreach( var c in Columns.Keys )
             {
                 AddPiece<Pawn,White>( c, 2 );
                 AddPiece<Pawn,Black>( c, 7 );
             }
 
-            // set rocks
             AddPiece<Rook,White>( 'A', 1 );
             AddPiece<Rook,White>( 'H', 1 );
             AddPiece<Rook,Black>( 'A', 8 );
             AddPiece<Rook,Black>( 'H', 8 );
 
-            // set knights
             AddPiece<Knight,White>( 'B', 1 );
             AddPiece<Knight,White>( 'G', 1 );
             AddPiece<Knight,Black>( 'B', 8 );
             AddPiece<Knight,Black>( 'G', 8 );
 
-            // set bishops
             AddPiece<Bishop,White>( 'C', 1 );
             AddPiece<Bishop,White>( 'F', 1 );
             AddPiece<Bishop,Black>( 'C', 8 );
             AddPiece<Bishop,Black>( 'F', 8 );
 
-            // set queens
             AddPiece<Queen,White>( 'D', 1 );
             AddPiece<Queen,Black>( 'D', 8 );
 
-            // set kings
             AddPiece<King,White>( 'E', 1 );
             AddPiece<King,Black>( 'E', 8 );
         }
@@ -172,6 +160,7 @@ namespace Chess.Core
             if( result.Capture )
             {
                 result.CapturedPiece = targetPiece;
+                targetPiece.IsAlive = false;
             }
 
             // change position of piece
