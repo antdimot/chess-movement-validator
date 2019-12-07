@@ -41,54 +41,75 @@ namespace Chess.Core
             return _cells[row - 1, Columns[column] - 1 ] as Piece;
         }
 
-        public T AddPiece<T,K>( char column, int row ) where T : Piece
-                                                       where K : PieceColor
+        public T AddWhitePiece<T>( char column, int row ) where T : Piece
         {
-            T piece;
-            
-            if( typeof(K) == typeof(White) )
-            {
-                piece = Activator.CreateInstance( typeof( T ),  PieceColor.White ) as T;
-                _whitePieces.Add( piece );
-            }
-            else {
-                 piece = Activator.CreateInstance( typeof( T ),  PieceColor.Black ) as T;
-                 _blackPieces.Add( piece );
-            }
+            T piece = Activator.CreateInstance( typeof( T ),  PieceColor.White ) as T;
+            _whitePieces.Add( piece );
 
             setPiece( piece, column, row );
 
             return piece;
         }
 
+        public T AddBlackPiece<T>( char column, int row ) where T : Piece
+        {
+            T piece = Activator.CreateInstance( typeof( T ),  PieceColor.Black ) as T;
+            _blackPieces.Add( piece );
+
+            setPiece( piece, column, row );
+
+            return piece;
+        }
+
+        // public T AddPiece<T,K>( char column, int row ) where T : Piece
+        //                                                where K : PieceColor
+        // {
+        //     T piece;
+            
+        //     if( typeof(K) == typeof(White) )
+        //     {
+        //         piece = Activator.CreateInstance( typeof( T ),  PieceColor.White ) as T;
+        //         _whitePieces.Add( piece );
+        //     }
+        //     else {
+        //          piece = Activator.CreateInstance( typeof( T ),  PieceColor.Black ) as T;
+        //          _blackPieces.Add( piece );
+        //     }
+
+        //     setPiece( piece, column, row );
+
+        //     return piece;
+        // }
+
         public void InitGame()
         {
             foreach( var c in Columns.Keys )
             {
-                AddPiece<Pawn,White>( c, 2 );
-                AddPiece<Pawn,Black>( c, 7 );
+
+                AddWhitePiece<Pawn>( c, 2 );
+                AddBlackPiece<Pawn>( c, 7 );
             }
 
-            AddPiece<Rook,White>( 'A', 1 );
-            AddPiece<Rook,White>( 'H', 1 );
-            AddPiece<Rook,Black>( 'A', 8 );
-            AddPiece<Rook,Black>( 'H', 8 );
+            AddWhitePiece<Rook>( 'A', 1 );
+            AddWhitePiece<Rook>( 'H', 1 );
+            AddBlackPiece<Rook>( 'A', 8 );
+            AddBlackPiece<Rook>( 'H', 8 );
 
-            AddPiece<Knight,White>( 'B', 1 );
-            AddPiece<Knight,White>( 'G', 1 );
-            AddPiece<Knight,Black>( 'B', 8 );
-            AddPiece<Knight,Black>( 'G', 8 );
+            AddWhitePiece<Knight>( 'B', 1 );
+            AddWhitePiece<Knight>( 'G', 1 );
+            AddBlackPiece<Knight>( 'B', 8 );
+            AddBlackPiece<Knight>( 'G', 8 );
 
-            AddPiece<Bishop,White>( 'C', 1 );
-            AddPiece<Bishop,White>( 'F', 1 );
-            AddPiece<Bishop,Black>( 'C', 8 );
-            AddPiece<Bishop,Black>( 'F', 8 );
+            AddWhitePiece<Bishop>( 'C', 1 );
+            AddWhitePiece<Bishop>( 'F', 1 );
+            AddBlackPiece<Bishop>( 'C', 8 );
+            AddBlackPiece<Bishop>( 'F', 8 );
 
-            AddPiece<Queen,White>( 'D', 1 );
-            AddPiece<Queen,Black>( 'D', 8 );
+            AddWhitePiece<Queen>( 'D', 1 );
+            AddBlackPiece<Queen>( 'D', 8 );
 
-            AddPiece<King,White>( 'E', 1 );
-            AddPiece<King,Black>( 'E', 8 );
+            AddWhitePiece<King>( 'E', 1 );
+            AddBlackPiece<King>( 'E', 8 );
         }
 
 

@@ -11,7 +11,7 @@ namespace Chess.Test
         {
             var board = Board.NewGame();
 
-            board.AddPiece<Pawn,White>( 'A', 2 );
+            board.AddWhitePiece<Pawn>( 'A', 2 );
 
             var result = board.MovePiece( 'A', 2, 'A', 4 );
 
@@ -23,7 +23,7 @@ namespace Chess.Test
         {
             var board = Board.NewGame();
 
-            board.AddPiece<Pawn,White>( 'A', 2 );
+            board.AddWhitePiece<Pawn>( 'A', 2 );
 
             var result = board.MovePiece( 'A', 2, 'A', 3 );
 
@@ -47,9 +47,9 @@ namespace Chess.Test
         {
             var board = Board.NewGame();
 
-            board.AddPiece<Pawn,White>( 'B', 4 );
+            board.AddWhitePiece<Pawn>( 'B', 4 );
 
-            board.AddPiece<Pawn,Black>( 'C', 5 );
+            board.AddBlackPiece<Pawn>( 'C', 5 );
 
             var result = board.MovePiece( 'B', 4, 'C', 5 );
 
@@ -67,9 +67,9 @@ namespace Chess.Test
         {
             var board = Board.NewGame();
 
-            board.AddPiece<Pawn,White>( 'B', 4 );
+            board.AddWhitePiece<Pawn>( 'B', 4 );
 
-            board.AddPiece<Pawn,White>( 'C', 5 );
+            board.AddWhitePiece<Pawn>( 'C', 5 );
 
             var result = board.MovePiece( 'B', 4, 'C', 5 );
 
@@ -81,7 +81,7 @@ namespace Chess.Test
         {
             var board = Board.NewGame();
 
-            board.AddPiece<Pawn,White>( 'A', 2 );
+            board.AddWhitePiece<Pawn>( 'A', 2 );
 
             var result = board.MovePiece( 'A', 2, 'A', 5 );
 
@@ -93,7 +93,7 @@ namespace Chess.Test
         {
             var board = Board.NewGame();
 
-            board.AddPiece<Pawn,White>( 'A', 5 );
+            board.AddWhitePiece<Pawn>( 'A', 5 );
 
             var result = board.MovePiece( 'A', 5, 'A', 4 );
 
