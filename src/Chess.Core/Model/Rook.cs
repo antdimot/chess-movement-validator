@@ -2,7 +2,7 @@
 {
     public class Rook : Piece
     {
-        // public Rook( ChessColor color ) : base( color ) { }
+        public override string Letter { get { return "RK"; } }
 
         public Rook( PieceColor color ) : base( color ) { }
 

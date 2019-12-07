@@ -43,7 +43,7 @@ namespace Chess.Test
 
                 Assert.IsType<Pawn>( whitePiece );
 
-                Assert.True( whitePiece.Color == PieceColor.White );
+                Assert.True( whitePiece.Color == 'W' );
 
                 var blackPiece = board.GetPiece( column, 7 );
 
@@ -51,7 +51,7 @@ namespace Chess.Test
 
                 Assert.IsType<Pawn>( blackPiece );
 
-                Assert.True( blackPiece.Color == PieceColor.Black );
+                Assert.True( blackPiece.Color == 'B' );
             }
         }
 
@@ -67,7 +67,7 @@ namespace Chess.Test
 
             Assert.IsType<Rook>( whiteRook1 );
 
-            Assert.True( whiteRook1.Color == PieceColor.White, "the color piece is not white" );
+            Assert.True( whiteRook1.Color == 'W', "the color piece is not white" );
 
             // check second white rook
             var whiteRook2 = board.GetPiece( 'H', 1 );
@@ -76,7 +76,7 @@ namespace Chess.Test
 
             Assert.IsType<Rook>( whiteRook2 );
 
-            Assert.True( whiteRook2.Color == PieceColor.White, "the color piece is not white" );
+            Assert.True( whiteRook2.Color == 'W', "the color piece is not white" );
 
             // check first black rook
             var blackRook1 = board.GetPiece( 'A', 8 );
@@ -85,7 +85,7 @@ namespace Chess.Test
 
             Assert.IsType<Rook>( blackRook1 );
 
-            Assert.True( blackRook1.Color == PieceColor.Black, "the color piece is not black" );
+            Assert.True( blackRook1.Color == 'B', "the color piece is not black" );
 
             // check second black rook
             var blackRook2 = board.GetPiece( 'H', 8 );
@@ -94,7 +94,7 @@ namespace Chess.Test
 
             Assert.IsType<Rook>( blackRook2 );
 
-            Assert.True( blackRook2.Color == PieceColor.Black, "the color piece is not black" );
+            Assert.True( blackRook2.Color == 'B', "the color piece is not black" );
         }
 
         [Fact]
@@ -109,7 +109,7 @@ namespace Chess.Test
 
             Assert.IsType<Knight>( whiteKnight1 );
 
-            Assert.True( whiteKnight1.Color == PieceColor.White, "the color piece is not white" );
+            Assert.True( whiteKnight1.Color == 'W', "the color piece is not white" );
 
             // check second white knight
             var whiteKnight2 = board.GetPiece( 'G', 1 );
@@ -118,7 +118,7 @@ namespace Chess.Test
 
             Assert.IsType<Knight>( whiteKnight2 );
 
-            Assert.True( whiteKnight2.Color == PieceColor.White, "the color piece is not white" );
+            Assert.True( whiteKnight2.Color == 'W', "the color piece is not white" );
 
             // check first black knight
             var blackKnight1 = board.GetPiece( 'B', 8 );
@@ -127,7 +127,7 @@ namespace Chess.Test
 
             Assert.IsType<Knight>( blackKnight1 );
 
-            Assert.True( blackKnight1.Color == PieceColor.Black, "the color piece is not black" );
+            Assert.True( blackKnight1.Color == 'B', "the color piece is not black" );
 
             // check second white knight
             var blackKnight2 = board.GetPiece( 'G', 8 );
@@ -136,7 +136,7 @@ namespace Chess.Test
 
             Assert.IsType<Knight>( blackKnight2 );
 
-            Assert.True( blackKnight2.Color == PieceColor.Black, "the color piece is not black" );
+            Assert.True( blackKnight2.Color == 'B', "the color piece is not black" );
         }
 
         [Fact]
@@ -151,7 +151,7 @@ namespace Chess.Test
 
             Assert.IsType<Bishop>( whiteBishop1 );
 
-            Assert.True( whiteBishop1.Color == PieceColor.White, "the color piece is not white" );
+            Assert.True( whiteBishop1.Color == 'W', "the color piece is not white" );
 
             // check second white bishop
             var whiteBishop2 = board.GetPiece( 'F', 1 );
@@ -160,7 +160,7 @@ namespace Chess.Test
 
             Assert.IsType<Bishop>( whiteBishop2 );
 
-            Assert.True( whiteBishop2.Color == PieceColor.White, "the color piece is not white" );
+            Assert.True( whiteBishop2.Color == 'W', "the color piece is not white" );
 
             // check first black bishop
             var blackBishop1 = board.GetPiece( 'C', 8 );
@@ -169,7 +169,7 @@ namespace Chess.Test
 
             Assert.IsType<Bishop>( blackBishop1 );
 
-            Assert.True( blackBishop1.Color == PieceColor.Black, "the color piece is not black" );
+            Assert.True( blackBishop1.Color == 'B', "the color piece is not black" );
 
             // check second black bishop
             var blackBishop2 = board.GetPiece( 'F', 8 );
@@ -178,7 +178,7 @@ namespace Chess.Test
 
             Assert.IsType<Bishop>( blackBishop2 );
 
-            Assert.True( blackBishop2.Color == PieceColor.Black, "the color piece is not black" );
+            Assert.True( blackBishop2.Color == 'B', "the color piece is not black" );
         }
 
         [Fact]
@@ -193,7 +193,7 @@ namespace Chess.Test
 
             Assert.IsType<Queen>( whiteQueen );
 
-            Assert.True( whiteQueen.Color == PieceColor.White, "the color piece is not white" );
+            Assert.True( whiteQueen.Color == 'W', "the color piece is not white" );
 
             // check  black queen
             var blackQueen = board.GetPiece( 'D', 8 );
@@ -202,7 +202,7 @@ namespace Chess.Test
 
             Assert.IsType<Queen>( blackQueen );
 
-            Assert.True( blackQueen.Color == PieceColor.Black, "the color piece is not black" );
+            Assert.True( blackQueen.Color == 'B', "the color piece is not black" );
         }
 
         [Fact]
@@ -217,7 +217,7 @@ namespace Chess.Test
 
             Assert.IsType<King>( whiteKing );
 
-            Assert.True( whiteKing.Color == PieceColor.White, "the color piece is not white" );
+            Assert.True( whiteKing.Color == 'W', "the color piece is not white" );
 
             // check  black queen
             var blackKing = board.GetPiece( 'E', 8 );
@@ -226,7 +226,7 @@ namespace Chess.Test
 
             Assert.IsType<King>( blackKing );
 
-            Assert.True( blackKing.Color == PieceColor.Black, "the color piece is not black" );
+            Assert.True( blackKing.Color == 'B', "the color piece is not black" );
         }
     }
 }

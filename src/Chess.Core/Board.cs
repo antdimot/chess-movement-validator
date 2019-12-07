@@ -61,26 +61,6 @@ namespace Chess.Core
             return piece;
         }
 
-        // public T AddPiece<T,K>( char column, int row ) where T : Piece
-        //                                                where K : PieceColor
-        // {
-        //     T piece;
-            
-        //     if( typeof(K) == typeof(White) )
-        //     {
-        //         piece = Activator.CreateInstance( typeof( T ),  PieceColor.White ) as T;
-        //         _whitePieces.Add( piece );
-        //     }
-        //     else {
-        //          piece = Activator.CreateInstance( typeof( T ),  PieceColor.Black ) as T;
-        //          _blackPieces.Add( piece );
-        //     }
-
-        //     setPiece( piece, column, row );
-
-        //     return piece;
-        // }
-
         public void InitGame()
         {
             foreach( var c in Columns.Keys )

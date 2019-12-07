@@ -6,26 +6,18 @@ namespace Chess.Core.Model
 {
     public abstract class Piece
     {
-        public PieceColor Color { get; private set; }
+        public abstract string Letter { get; }
+        public char Color { get; private set; }
         
         public Boolean IsAlive { get; set; }
 
         protected Collection<Rule> Rules;
 
-        public override bool Equals( object obj )
-        {
-            if( obj == null ) return false;
-
-            if( this.GetType() != obj.GetType() ) return false;
-
-            return true;
-        }
-
         public Piece( PieceColor color )
         {
             Rules = new Collection<Rule>();
 
-            Color = color;
+            Color = ( color == PieceColor.White ? 'W' : 'B' );
 
             IsAlive = true;
 
@@ -50,13 +42,7 @@ namespace Chess.Core.Model
 
         public override string ToString()
         {
-            return String.Format( "{0} {1}", Color.ToString(), this.GetType().Name );
-        }
-
-
-        public override int GetHashCode()
-        {
-            return base.GetHashCode();
+            return String.Format( "{0} {1}", this.Letter, Color );
         }
     }
 }

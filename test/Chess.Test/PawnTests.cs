@@ -39,7 +39,7 @@ namespace Chess.Test
 
             Assert.IsType<Pawn>( newPosition );
 
-            Assert.True( newPosition.Color == PieceColor.White, "The piece at new position is different." );
+            Assert.True( newPosition.Color == 'W', "The piece at new position is different." );
         }
 
         [Fact]
