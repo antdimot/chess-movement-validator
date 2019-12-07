@@ -40,9 +40,6 @@ namespace Chess.Core.Model
 
         public abstract void InitializeRules();
 
-        public override string ToString()
-        {
-            return String.Format( "{0} {1}", this.Letter, Color );
-        }
+        public override string ToString() => $"{Letter}{Color}";
     }
 }

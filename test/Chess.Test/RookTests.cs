@@ -11,7 +11,7 @@ namespace Chess.Test
         {
             var board = Board.NewEmpty();
 
-            board.AddWhitePiece<Rook>( 'A', 1 );
+            board.AddWhite<Rook>( 'A', 1 );
 
             var result = board.MovePiece( 'A', 1, 'A', 8 );
 
@@ -23,9 +23,9 @@ namespace Chess.Test
         {
             var board = Board.NewEmpty();
 
-            board.AddWhitePiece<Rook>( 'A', 1 );
+            board.AddWhite<Rook>( 'A', 1 );
 
-            board.AddWhitePiece<Pawn>( 'A', 4 );
+            board.AddWhite<Pawn>( 'A', 4 );
 
             var result = board.MovePiece( 'A', 1, 'A', 8 );
 
