@@ -28,21 +28,30 @@ namespace Chess.Player
                     case "h":
                         Console.WriteLine( "Available commands:" );
                         Console.WriteLine( "p -> print chess board" );
-                        Console.WriteLine( "n -> check next player" );
+                        Console.WriteLine( "n -> next player" );
                         Console.WriteLine( "m -> move piece" );
                         break;
                     case "n":
                         Console.WriteLine( $"The next player is {game.ShowNextPlayer()}" );
                         break;
                     case "m":
-                        Console.Write( "From: " );
-                        var source = Console.ReadLine();
-                        Console.Write( "To: " );
-                        var target = Console.ReadLine();
+                        Console.WriteLine( "Move a piece on Chessboard:" );
 
+                        Console.Write( "From (example A2): " );
+                        var source = Console.ReadLine();
+                        if( source.Length != 2 ) {
+                            Console.WriteLine( "Invalid input. It should be two chars, example A2." );
+                            break;
+                        }
                         var fromColumn = source.ToUpper()[0];  
                         var fromRow =  Convert.ToInt32( source.Substring(1,1) );
 
+                        Console.Write( "To (example A3): " );
+                        var target = Console.ReadLine();
+                        if( target.Length != 2 ) {
+                            Console.WriteLine( "Invalid input. It should be two chars, example A2." );
+                            break;
+                        }
                         var toColumn = target.ToUpper()[0];
                         var toRow = Convert.ToInt32( target.Substring(1,1) );
 
@@ -55,6 +64,7 @@ namespace Chess.Player
                         game.ShowBoard( Console.OpenStandardOutput() );
                         break;
                     default:
+                        Console.WriteLine( "Invalid command!" );
                         break;
                 }
             }
