@@ -28,7 +28,7 @@ namespace Chess.Player
                     case "h":
                         Console.WriteLine( "Available commands:" );
                         Console.WriteLine( "p -> print chess board" );
-                        Console.WriteLine( "n -> check next player" );
+                        Console.WriteLine( "n -> next player" );
                         Console.WriteLine( "m -> move piece" );
                         break;
                     case "n":
