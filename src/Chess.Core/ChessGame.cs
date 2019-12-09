@@ -4,25 +4,25 @@ using Chess.Core.Model;
 
 namespace Chess.Core
 {
-    public class Game
+    public class ChessGame
     {
-        private PieceColor _nextPlayer;
+        private PieceColor _nextPlayerColor;
 
         public Board ChessBoard { get; private set; }
 
-        public Game()
+        public ChessGame()
         {
             ChessBoard = Board.NewGame();
 
-            _nextPlayer = PieceColor.White;
+            _nextPlayerColor = PieceColor.White;
         }
 
         public string Move( char fromColumn, int fromRow, char toColumn, int toRow )
         {
-            var result = ChessBoard.MovePiece( fromColumn, fromRow, toColumn, toRow );
+            var result = ChessBoard.MovePiece( fromColumn, fromRow, toColumn, toRow, _nextPlayerColor );
 
             if( result.IsSuccess ) {
-                _nextPlayer = ( _nextPlayer == PieceColor.White ? PieceColor.Black : PieceColor.White );
+                _nextPlayerColor = ( _nextPlayerColor == PieceColor.White ? PieceColor.Black : PieceColor.White );
             }
 
             return result.Description;
@@ -30,7 +30,7 @@ namespace Chess.Core
 
         public string ShowNextPlayer()
         {
-            return ( _nextPlayer == PieceColor.White ? "WHITE" : "BLACK" );
+            return ( _nextPlayerColor == PieceColor.White ? "WHITE" : "BLACK" );
         }
 
         public void ShowBoard( Stream outStream )
@@ -39,14 +39,9 @@ namespace Chess.Core
             sw.AutoFlush = true;
             // Console.SetOut(sw);
 
-            sw.Write( "     " );
-            foreach (var letter in Board.Letters )
-            {
-                sw.Write( $" {letter}    " );
-            }
-            sw.Write( "\n" );
+            sw.WriteLine( "\n   -------------------------------------------------" );
 
-            for (int i = 1; i <= 8; i++)
+            for (int i = 8; i >= 1; i--)
             {
                 sw.Write( $" {i} | " );
 
@@ -62,6 +57,13 @@ namespace Chess.Core
 
                 sw.WriteLine( "\n   -------------------------------------------------" );
             }
+
+            sw.Write( "     " );
+            foreach (var letter in Board.Letters )
+            {
+                sw.Write( $" {letter}    " );
+            }
+            sw.Write( "\n" );
         }
     }
 }

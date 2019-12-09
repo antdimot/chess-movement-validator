@@ -10,7 +10,7 @@ namespace Chess.Player
         {
             Console.WriteLine( "Chess player started." );
 
-            var game = new Game();
+            var game = new ChessGame();
 
             var finished = false;
 

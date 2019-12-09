@@ -89,19 +89,25 @@ namespace Chess.Core.Model
         }
 
         // try to do a movement of piece
-        public MovementResult MovePiece( char column, int row, char targetColumn, int targetRow )
+        public MovementResult MovePiece( char column, int row, char targetColumn, int targetRow, PieceColor? color = null )
         {
+            var result = new MovementResult();
+        
             if( Columns[targetColumn] < 1 || Columns[targetColumn] > 8 || targetRow < 1 || targetRow > 8 )
             {
-                throw new InvalidMovementException( "Target position is out of the bounds." );
+                result.IsSuccess = false;
+                result.Description = "Target position is out of the bounds.";
+
+                return result;
             }
 
             if( ( column == targetColumn ) && ( row == targetRow ) )
             {
-                throw new InvalidMovementException( "Current position and target position are equals." );
-            }
+                result.IsSuccess = false;
+                result.Description = "Current position and target position are equals.";
 
-            var result = new MovementResult();
+                return result;
+            }
 
             var selectPiece = GetPiece( column, row );
 
@@ -112,6 +118,17 @@ namespace Chess.Core.Model
                 result.Description = $"The piece was not found at position {column}{row.ToString()}";
 
                 return result;
+            }
+
+            // check color of piece
+            if( color.HasValue ) {
+                if( ( color == PieceColor.White && selectPiece.Color == 'B' ) ||
+                    ( color == PieceColor.Black && selectPiece.Color == 'W' )  ) {
+                    result.IsSuccess = false;
+                    result.Description = $"The piece selected has wrong color.";
+
+                    return result;
+                }
             }
 
             var targetPiece = GetPiece( targetColumn, targetRow );
