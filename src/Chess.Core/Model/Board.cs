@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Chess.Core.Infrastructure;
-using Chess.Core.Model;
 
 namespace Chess.Core.Model
 {
