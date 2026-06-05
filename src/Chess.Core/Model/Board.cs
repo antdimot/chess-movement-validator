@@ -5,24 +5,28 @@ namespace Chess.Core.Model
 {
     public class Board
     {
-        public static char[] Letters = { 'A','B','C','D','E','F','G','H' };
+        public static readonly char[] Letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
 
-        public static Dictionary<char, int> Columns = new Dictionary<char, int>() {
+        public static readonly Dictionary<char, int> Columns = new() {
                 { 'A', 1 }, { 'B', 2 }, { 'C', 3 }, { 'D', 4 }, { 'E', 5 }, { 'F', 6 }, { 'G', 7 }, { 'H', 8 }
         };
 
         // piece's position status on board
-        private Object[,] _cases;
-        private IList<Piece> _pieces;
+        private readonly object?[,] _cases;
+        private readonly IList<Piece> _pieces;
 
-        public object[,] Cases() => _cases;
+        public object?[,] Cases() => _cases;
 
         private Board()
         {
-            _cases = new Object[8, 8];
-            _pieces = new List<Piece>();
+            _cases = new object?[8, 8];
+            _pieces = [];
         }
 
+        /// <summary>
+        /// Create a new chess board with pieces at start position for new game.
+        /// </summary>
+        /// <returns></returns>
         public static Board NewGame()
         {
             var board = new Board();
@@ -33,28 +37,47 @@ namespace Chess.Core.Model
         }
 
         public static Board NewEmpty() => new Board();
-        public Piece GetPiece( char column, int row ) => _cases[row - 1, Columns[column] - 1 ] as Piece;
+        public Piece? GetPiece(char column, int row) => _cases[row - 1, Columns[column] - 1] as Piece;
 
-        public T SetWhite<T>( char column, int row ) where T : Piece
+        /// <summary>
+        /// Set a piece with color white at position column-row and return the piece created.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="column"></param>
+        /// <param name="row"></param>
+        /// <returns></returns>
+        public T SetWhite<T>(char column,int row) where T : Piece
         {
-            T piece = Activator.CreateInstance( typeof( T ),  PieceColor.White ) as T;
-            _pieces.Add( piece );
+            T? piece = Activator.CreateInstance(typeof(T), PieceColor.White) as T;
 
-            setPiece( piece, column, row );
+            _pieces.Add(piece!);
 
-            return piece;
+            SetPiece(piece!, column, row);
+
+            return piece!;
         }
 
-        public T SetBlack<T>( char column, int row ) where T : Piece
+        /// <summary>
+        /// Set a piece with color black at position column-row and return the piece created.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="column"></param>
+        /// <param name="row"></param>
+        /// <returns></returns>
+        public T SetBlack<T>(char column,int row) where T : Piece
         {
-            T piece = Activator.CreateInstance( typeof( T ),  PieceColor.Black ) as T;
-            _pieces.Add( piece );
+            T? piece = Activator.CreateInstance( typeof( T ),  PieceColor.Black ) as T;
 
-            setPiece( piece, column, row );
+            _pieces.Add( piece! );
 
-            return piece;
+            SetPiece(piece!,column,row);
+
+            return piece!;
         }
 
+        /// <summary>
+        /// Chess board initialization with pieces at start position for new game.
+        /// </summary>
         public void InitGame()
         {
             foreach( var column in Columns.Keys )
@@ -86,7 +109,15 @@ namespace Chess.Core.Model
             SetBlack<King>( 'E', 8 );
         }
 
-        // try to do a movement of piece
+        /// <summary>
+        /// Move a piece from position column-row to targetColumn-targetRow and return the result of movement with information about capture if it is the case.
+        /// </summary>
+        /// <param name="column"></param>
+        /// <param name="row"></param>
+        /// <param name="targetColumn"></param>
+        /// <param name="targetRow"></param>
+        /// <param name="color"></param>
+        /// <returns></returns>
         public MovementResult MovePiece( char column, int row, char targetColumn, int targetRow, PieceColor? color = null )
         {
             var result = new MovementResult();
@@ -146,7 +177,7 @@ namespace Chess.Core.Model
             }
 
             // check if the path is free if piece is not a knight
-            if( !(selectPiece is Knight) && !checkIfPathIsFree( column, row, targetColumn, targetRow ) )
+            if( !(selectPiece is Knight) && !CheckIfPathIsFree( column, row, targetColumn, targetRow ) )
             {
                 result.IsSuccess = false;
                 result.Description =
@@ -173,30 +204,27 @@ namespace Chess.Core.Model
             if( result.Capture )
             {
                 result.CapturedPiece = targetPiece;
-                targetPiece.IsAlive = false;
+                targetPiece!.IsAlive = false;
             }
 
             // change position of piece
-            setPiece( selectPiece, targetColumn, targetRow );
-            clearBoardPosition( column, row );
+            SetPiece( selectPiece, targetColumn, targetRow );
+            ClearBoardPosition( column, row );
 
             return result;
         }
 
-        // set piece at position
-        private void setPiece( Piece piece, char column, int row )
-        {
-            _cases[ row - 1, Columns[column] - 1 ] = piece;
-        }
+        // set piece at position, internal logic without any check, use it only after all checks are done for movement
+        private void SetPiece(Piece piece, char column, int row) => _cases[row - 1, Columns[column] - 1] = piece;
 
-        // clear piece at position
-        private void clearBoardPosition( char column, int row )
+        // clear piece at position, internal logic without any check, use it only after all checks are done for movement
+        private void ClearBoardPosition(char column, int row)
         {
-            _cases[ row - 1, Columns[column] - 1 ] = null;
+            _cases[row - 1, Columns[column] - 1] = null;
         }
 
         // check if the path for select piece is free
-        private bool checkIfPathIsFree( char column, int row, char targetColumn, int targetRow )
+        private bool CheckIfPathIsFree(char column, int row, char targetColumn, int targetRow)
         {
             bool result = true;
 
@@ -209,8 +237,8 @@ namespace Chess.Core.Model
             int r = row - 1;
 
             // next position
-            c = c + stepx;
-            r = r + stepy;
+            c += stepx;
+            r += stepy;
 
             while( !(c == ( Columns[targetColumn] - 1 ) && r == (targetRow -1)) )
             {
@@ -223,12 +251,11 @@ namespace Chess.Core.Model
                 }
 
                 // next position
-                c = c + stepx;
-                r = r + stepy;
+                c += stepx;
+                r += stepy;
             }
 
             return result;
         }
-
     }
 }
