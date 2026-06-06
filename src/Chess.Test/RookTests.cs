@@ -9,6 +9,9 @@ namespace Chess.Test
     /// </summary>
     public class RookTests
     {
+        /// <summary>
+        /// Test case for the movement of the rook. It tests that the rook can move to a position that is on the same column and that the path is free. The rook can move any number of squares along a column, but it cannot jump over other pieces. Therefore, it is important to test that the rook can move to a position that is on the same column and that the path is free to ensure that it behaves correctly according to the rules of chess.
+        /// </summary>
         [Fact]
         public void MovePiece_Allow_VerticalPathISFree()
         {
@@ -21,6 +24,9 @@ namespace Chess.Test
             Assert.True( result.IsSuccess, result.Description );
         }
 
+        /// <summary>
+        /// Test case for the movement of the rook. It tests that the rook cannot move to a position that is on the same column but the path is not free. The rook can move any number of squares along a column, but it cannot jump over other pieces. Therefore, it is important to test that the rook cannot move to a position that is on the same column but the path is not free to ensure that it behaves correctly according to the rules of chess.
+        /// </summary>
         [Fact]
         public void MovePiece_NotAllow_VerticalPathISNOTFree()
         {
