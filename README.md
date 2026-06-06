@@ -1,12 +1,14 @@
 # Chess Movements Validator
 
-### Abstract
+## Abstract
 
-Chess movement engine validator using .Net Core.
+The goal of this project is making a chess engine able to validate the movements on chess board. To accomplish this the engine implement classic chess rules and check the current status of chess board.
+
+Below some example of working.
 
 ### Examples
 
-```c#
+```C#
 // create a new board for play and move a Pawn
 var board = Board.NewGame();
 var result = board.MovePiece( 'A', 2, 'A', 4 );

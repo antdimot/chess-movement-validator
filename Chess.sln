@@ -1,4 +1,5 @@
-﻿Microsoft Visual Studio Solution File, Format Version 12.00
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.10
 MinimumVisualStudioVersion = 15.0.26124.0
@@ -8,7 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{157DBC66-9
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chess.Core", "src\Chess.Core\Chess.Core.csproj", "{08183355-8369-4033-8524-BBF121B2A845}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chess.Test", "test\Chess.Test\Chess.Test.csproj", "{7352A838-889B-4D81-9FF4-6F5909619196}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chess.Test", "src\Chess.Test\Chess.Test.csproj", "{7352A838-889B-4D81-9FF4-6F5909619196}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B7B06194-5910-4BC8-A26D-A37CE247FA46}"
 	ProjectSection(SolutionItems) = preProject
