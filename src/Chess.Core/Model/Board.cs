@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace Chess.Core.Model
 {
+    /// <summary>
+    /// Represents a chess board with pieces and their positions.
+    /// </summary>
     public class Board
     {
         public static readonly char[] Letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];

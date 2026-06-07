@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26730.10
+# Visual Studio Version 18
+VisualStudioVersion = 18.6.11822.322 stable
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{1EE15B4E-8FD9-459A-A21F-C7325B662D6E}"
 EndProject
@@ -13,7 +13,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chess.Test", "src\Chess.Tes
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B7B06194-5910-4BC8-A26D-A37CE247FA46}"
 	ProjectSection(SolutionItems) = preProject
-		Dockerfile = Dockerfile
 		README.md = README.md
 	EndProjectSection
 EndProject

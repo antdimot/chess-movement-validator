@@ -1,138 +1,120 @@
-# Chess Movement Validator - AI Coding Agent Instructions
+# Chess Movement Validator - Copilot Instructions
 
-## Architecture Overview
+## Project Overview
+This is a .NET 10 chess engine focused on validating chess piece movements. The architecture uses a **rule-based movement validation system** where each piece defines its legal moves through predicate compositions rather than imperative logic.
 
-This is a **rule-based chess engine** focused on validating piece movements according to chess rules. The codebase uses a **predicate-based validation system** rather than traditional if-else logic.
+## Architecture
 
-**Three-project structure:**
-- `Chess.Core` (.NET Standard library): Domain model (Board, Piece hierarchy, Game orchestration)
-- `Chess.Test` (xUnit): Test suite for movement validation
-- `Chess.Player` (Console app): Interactive text-based chess player
+### Core Components
+- **Chess.Core** (.NET Standard library): Domain model (Piece, Board, ChessGame)
+- **Chess.Test** (xUnit): Movement validation tests
+- **Chess.Player**: Console-based chess game simulator
 
-## Core Design Patterns
+### Key Design Patterns
 
-### 1. Rule-Based Movement Validation
-Pieces define movement rules using **predicate chains** in `InitializeRules()`. Each `Rule` contains multiple `Predicate<Movement>` delegates that ALL must pass.
+#### Rule-Based Movement Validation
+Each `Piece` subclass (Pawn, Rook, Bishop, etc.) defines movement rules via `Rule` objects containing predicates:
 
-**Example from Pawn.cs:**
 ```csharp
+// Example from Pawn.cs - rules are predicates, not imperative code
 Rules.Add(new Rule(
-	m => Color == 'W',           // Must be white
-	m => !m.WithCapture,         // Not capturing
-	m => m.StartY == 1,          // On starting row
-	m => m.EndX == m.StartX,     // Same column
-	m => m.EndY == m.StartY + 2  // Two squares forward
+	m => Color == 'W',           // Predicate 1: must be white
+	m => !m.WithCaputure,        // Predicate 2: not capturing
+	m => m.EndX == m.StartX,     // Predicate 3: same column
+	m => m.EndY == m.StartY + 1  // Predicate 4: move forward one
 ));
 ```
 
-**When adding new piece types or modifying movement rules:**
-- Create predicates for each condition (color, direction, distance, capture state)
-- All predicates in a Rule must return `true` for the movement to be valid
-- Use 0-based internal coordinates (converted from 1-based user input)
+**When adding piece movement logic**: Use composition of predicates in `InitializeRules()`, not if-else chains.
 
-### 2. Board Coordinate System
-- **User-facing:** Column letters (A-H) + rows (1-8)
-- **Internal storage:** 0-based 2D array `_cases[row, column]`
-- **Conversion:** `Board.Columns` dictionary maps 'A'-'H' to 1-8; subtract 1 for array indexing
+#### Board Coordinate System
+- **Columns**: 'A'-'H' mapped to 1-8 via `Board.Columns` dictionary
+- **Rows**: 1-8 (human notation) mapped to 0-7 array indices
+- **Internal representation**: `_cases[row-1, column-1]` (zero-indexed)
 
-### 3. Movement Validation Pipeline (Board.MovePiece)
-Six checks executed in order:
-1. Bounds validation (target in A1-H8)
-2. Non-identity check (from ≠ to)
-3. Piece presence at source
-4. Color validation (if ChessGame enforces turn)
-5. **Piece-specific rule validation** (IsValidMovement)
-6. Path obstruction (Knights skip this)
-7. Target square color conflict
+**Critical**: Convert user input (e.g., 'A', 2) to array indices before accessing `_cases`.
 
-### 4. Knight Special Case
-Knights jump over pieces. `CheckIfPathIsFree()` is explicitly skipped for Knight instances in `MovePiece()`:
+#### Movement Validation Flow
+`Board.MovePiece()` executes this sequence:
+1. Bounds checking (target position valid)
+2. Position equality check (not moving to same square)
+3. Source piece existence check
+4. Color validation (if player color specified)
+5. Piece-specific rule validation (`Piece.IsValidMovement()`)
+6. Path obstruction check (except for Knights)
+7. Target square color conflict check
+8. Execute move and capture logic
+
+**When modifying movement logic**: Follow this exact sequence - don't skip steps or reorder checks.
+
+#### Piece State Management
+- **Creation pattern**: Use `Board.SetWhite<T>()` / `Board.SetBlack<T>()` with generic types
+- **Internal tracking**: Board maintains `_pieces` collection AND `_cases` 2D array
+- **Capture handling**: Set `IsAlive = false` and clear from `_cases`, but keep in `_pieces` list
+
+## Project Conventions
+
+### Naming Patterns
+- **Piece letters**: 2-char codes (PA=Pawn, RK=Rook, BS=Bishop, KN=Knight, QU=Queen, KG=King)
+- **Colors**: Single char 'W' or 'B' (not full enum values in display)
+- **Movement coordinates**: Use `startX/startY/endX/endY` (converted to 1-based columns/rows)
+
+### Test Structure
+- Test classes organized by piece type (`PawnTests.cs`, `RookTests.cs`)
+- Test naming: `MovePiece_[Allow|NotAllow]_[SpecificScenario]`
+- Always test both valid AND invalid movements for each rule
+- Use `Board.NewGame()` for standard setup, `Board.NewEmpty()` for custom scenarios
+
+Example test pattern:
 ```csharp
-if (!(selectPiece is Knight) && !CheckIfPathIsFree(...))
+[Fact]
+public void MovePiece_Allow_TwoStepFromStartPosition()
+{
+	var board = Board.NewGame();
+	board.SetWhite<Pawn>('A', 2);
+	var result = board.MovePiece('A', 2, 'A', 4);
+	Assert.True(result.IsSuccess, result.Description);
+}
 ```
 
-## Key Classes
+### XML Documentation
+All public APIs have triple-slash comments explaining:
+- Purpose and behavior
+- Chess rule context (why this logic exists)
+- Parameter meanings and expected formats
 
-### Board
-- `NewGame()`: Initializes standard chess starting position
-- `NewEmpty()`: Creates blank board for custom setups
-- `SetWhite<T>()/SetBlack<T>()`: Place pieces using generics
-- `MovePiece()`: Core validation and state mutation (returns `MovementResult`)
+**When adding new methods**: Follow this documentation pattern - explain the chess logic, not just the code.
 
-### Piece (abstract)
-- `Letter`: Display identifier (e.g., "PA"=Pawn, "KN"=Knight)
-- `Color`: 'W' or 'B' (char, not enum in display logic)
-- `IsAlive`: Tracks captured state
-- `Rules`: Collection of movement validators
+## Development Workflow
 
-### ChessGame
-- Wraps Board with turn enforcement (`_nextPlayerColor`)
-- `Move()`: Delegates to Board.MovePiece with color check, then alternates turn
-- `ShowBoard()`: Renders ASCII board to stream
-
-### MovementResult
-- `IsSuccess`: Boolean validation outcome
-- `Description`: User-friendly error/success message
-- `Capture`: Whether opponent piece was taken
-- `CapturedPiece`: Reference to captured piece (sets `IsAlive = false`)
-
-## Testing Conventions
-
-Tests in `Chess.Test` use xUnit with **descriptive method names** following pattern:
-`MethodName_Allow|NotAllow_ScenarioDescription`
-
-**Examples:**
-- `MovePiece_Allow_TwoStepFromStartPosition` (Pawn initial double move)
-- `MovePiece_NotAllow_BusyPositionWithSameColor` (collision detection)
-
-**Setup pattern:**
-```csharp
-var board = Board.NewEmpty();  // or NewGame() for full setup
-board.SetWhite<Pawn>('A', 2);
-var result = board.MovePiece('A', 2, 'A', 4);
-Assert.True(result.IsSuccess, result.Description);
+### Build & Test
+```powershell
+dotnet restore
+dotnet build
+dotnet test  # Runs xUnit tests in Chess.Test
 ```
 
-## Build & Run
-
-```bash
-dotnet restore          # Restore dependencies
-dotnet build           # Build all projects
-dotnet test            # Run xUnit tests
-dotnet run --project src/Chess.Player  # Launch console player
+### Running the Console Player
+```powershell
+cd src/Chess.Player
+dotnet run
+# Commands: m (move), p (print board), n (next player), h (help), q (quit)
 ```
 
-**Console commands (Chess.Player):**
-- `m` - Move piece (prompts for "A2" to "A4" style input)
-- `p` - Print board
-- `n` - Show next player
-- `h` - Help
-- `q` - Quit
-
-## Adding New Features
-
-### New Piece Type
+### Adding New Pieces
 1. Create class inheriting `Piece` in `Chess.Core/Model/`
-2. Override `Letter` (e.g., "AR" for Archbishop)
-3. Implement `InitializeRules()` with predicate-based rules
-4. Add to `Board.InitGame()` if standard piece
-5. Create test suite `{PieceName}Tests.cs` covering all movement patterns
+2. Override `Letter` property with 2-char code
+3. Implement `InitializeRules()` using predicate-based `Rule` objects
+4. Add to `Board.InitGame()` for standard setup
+5. Create `[PieceName]Tests.cs` with movement scenarios
 
 ### Modifying Movement Logic
-- **DO:** Add new Rules to existing pieces' `InitializeRules()`
-- **DON'T:** Modify `Board.MovePiece()` validation order (breaks existing tests)
-- Test both success and failure cases (path obstruction, capture, color conflict)
+- **DO**: Add predicates to `Rule` objects in piece classes
+- **DON'T**: Add conditional logic to `Board.MovePiece()` for specific pieces
+- Path obstruction checking is in `Board.CheckIfPathIsFree()` - Knights bypass this
 
-### Special Moves (Castling, En Passant)
-Not currently implemented. Would require:
-- Game state tracking (king/rook move history, last move)
-- Rule IDs (already supported: `Rule(int id, ...)`)
-- Post-validation state updates in `Board.MovePiece()`
-
-## Code Style Notes
-
-- Uses C# 10+ features (collection expressions `[]`, file-scoped namespaces implicit in .NET 10)
-- `Nullable` enabled project-wide
-- Piece color stored as `char` ('W'/'B') not enum for display simplicity
-- XML doc comments on all public methods (maintain this pattern)
-- Activator pattern for generic piece instantiation (`SetWhite<T>()`)
+## Important Files
+- `src/Chess.Core/Model/Board.cs`: Central movement validation (264 lines)
+- `src/Chess.Core/Model/Piece.cs`: Base class with rule validation engine
+- `src/Chess.Core/Model/Rule.cs`: Predicate composition for movement rules
+- `src/Chess.Core/ChessGame.cs`: Turn management and player API
